@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shoe/AnimatedAuthTaste.dart';
 import 'package:shoe/HomeScreen.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shoe/features/authentication/view/pages/LoginScrren.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:  Animatedauthtaste()
+      home:  Loginscrren()
     );
   }
 }
