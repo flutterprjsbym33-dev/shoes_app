@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../widgets/AnimatedCard.dart';
-import '../../../../widgets/AnimatedTextWidget.dart';
-import '../../../../widgets/BottomCurve.dart';
-import '../../../../widgets/Topcurve.dart';
+import '../widgets/AnimatedCard.dart';
+import '../widgets/AnimatedTextWidget.dart';
+import '../widgets/BottomCurve.dart';
+import '../widgets/Topcurve.dart';
 
 class Loginscrren extends StatefulWidget {
   const Loginscrren({super.key});

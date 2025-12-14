@@ -1,7 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:shoe/widgets/BottomCurve.dart';
-import 'package:shoe/widgets/Topcurve.dart';
 
 
 class AnimatedCardwidget extends StatefulWidget {
@@ -43,7 +41,7 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
             boxShadow: [
               BoxShadow(
                 blurRadius: 20,
-                color: Colors.black.withOpacity(0.15),
+
               ),
             ],
           ),

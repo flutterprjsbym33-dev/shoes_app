@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:shoe/widgets/BottomCurve.dart';
-import 'package:shoe/widgets/Topcurve.dart';
+
 
 
 class Animatedtextwidget extends StatefulWidget {
@@ -15,7 +14,7 @@ class _AnimatedtextwidgetState extends State<Animatedtextwidget> {
 
   bool showTitle = false;
   bool showSubtitle = false;
-  bool showCard = false;
+
 
   @override
   void initState() {
@@ -31,9 +30,7 @@ class _AnimatedtextwidgetState extends State<Animatedtextwidget> {
     });
 
     // Card scales after
-    Future.delayed(const Duration(milliseconds: 1400), () {
-      setState(() => showCard = true);
-    });
+
   }
 
 
