@@ -1,9 +1,17 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoe/features/authentication/view/widgets/CustomButton.dart';
+import 'package:shoe/features/authentication/view/widgets/customTextBox.dart';
+
+import 'SocialIconhandler.dart';
 
 
 class AnimatedCardwidget extends StatefulWidget {
-  const AnimatedCardwidget({super.key});
+  String hint;
+
+
+   AnimatedCardwidget({super.key,required this.hint,});
 
   @override
   State<AnimatedCardwidget> createState() => _AnimatedCardwidgetState();
@@ -11,14 +19,14 @@ class AnimatedCardwidget extends StatefulWidget {
 
 class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
 
-
   bool showCard = false;
+  late final hint ;
 
   @override
   void initState() {
     super.initState();
 
-    // Card scales after
+    hint = widget.hint;
     Future.delayed(const Duration(milliseconds: 1400), () {
       setState(() => showCard = true);
     });
@@ -27,14 +35,15 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Center(
       child: AnimatedScale(
         scale: showCard ? 1 : 0,
         duration: const Duration(milliseconds: 900),
         curve: Curves.easeOutBack,
         child: Container(
-          height: 400,
-          width: 320,
+          height: 350.h,
+          width: 320.w,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
@@ -45,19 +54,38 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
               ),
             ],
           ),
-          child: Card(
-            elevation: 4
-            ,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: const [
-                  TextField(decoration: InputDecoration(labelText: "Email")),
-                  SizedBox(height: 16),
-                  TextField(decoration: InputDecoration(labelText: "Password")),
-                ],
+          child: Column(
+            children: [
+              Expanded(
+                child: Card(
+                  elevation: 4
+                  ,
+                  child: Padding(
+                    padding: const EdgeInsets.all( 8.0),
+                    child: Column(
+                      children:  [
+
+                        Center(child: Text(hint,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w600,color: Colors.black),)),
+                        SizedBox(height: 15.h,),
+                        CustomTextBox(hint: "Email", callback: (){}, iconData: Icons.email),
+                        SizedBox(height: 15.h),
+                        CustomTextBox(hint: "Password", callback: (){}, iconData: Icons.password),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: TextButton(onPressed: (){}, child: Text("Forgot Password?")),
+                        ),
+                        SizedBox(height: 10.h),
+                        Custombutton(hint: "Login")
+
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
+
+
+
+            ],
           ),
         ),
       ),

@@ -5,10 +5,11 @@ class Topcurve extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return ClipPath(
       clipper: TopCurveClipper(),
       child: Container(
-        height: 300,
+        height: height*0.4,
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [

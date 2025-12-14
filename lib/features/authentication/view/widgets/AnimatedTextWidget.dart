@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 
 
 class Animatedtextwidget extends StatefulWidget {
-  const Animatedtextwidget({super.key});
+
+  String title,subTitle;
+
+   Animatedtextwidget({super.key,required this.title,required this.subTitle});
 
   @override
   State<Animatedtextwidget> createState() => _AnimatedtextwidgetState();
@@ -15,10 +18,15 @@ class _AnimatedtextwidgetState extends State<Animatedtextwidget> {
   bool showTitle = false;
   bool showSubtitle = false;
 
+ late  String title,subTitle;
+
 
   @override
   void initState() {
+
     super.initState();
+    title = widget.title;
+    subTitle = widget.subTitle;
 
     // Text slides first
     Future.delayed(const Duration(milliseconds: 700), () {
@@ -47,17 +55,14 @@ class _AnimatedtextwidgetState extends State<Animatedtextwidget> {
             opacity: showTitle ? 1 : 0,
             duration: const Duration(seconds: 1),
             child:
-                const Text(
-                  "Welcome Back",
+                 Text(
+                  title,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 27,
                   ),
                 ),
-
-
-
             ),
           ),
 
@@ -71,7 +76,7 @@ class _AnimatedtextwidgetState extends State<Animatedtextwidget> {
             opacity: showSubtitle ? 1 : 0,
             duration: Duration(seconds: 1),
             child: Text(
-              "Explore and Enjoy amazing shoes deal with us",
+             subTitle,
               style: TextStyle(
                 color: Colors.grey.shade300,
                 fontSize: 16,

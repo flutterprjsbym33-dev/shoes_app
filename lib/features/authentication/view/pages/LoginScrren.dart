@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoe/features/authentication/view/widgets/SocialIconhandler.dart';
 
 import '../widgets/AnimatedCard.dart';
 import '../widgets/AnimatedTextWidget.dart';
@@ -25,10 +27,15 @@ class _LoginscrrenState extends State<Loginscrren> {
           Positioned(
             top: 85,
             left: 25,
-            child: Animatedtextwidget(),
+            child: Animatedtextwidget(title: 'Welcome Back',
+              subTitle:  "Explore and Enjoy amazing shoes deal with us",),
           ),
 
-          AnimatedCardwidget(),
+          AnimatedCardwidget(hint: 'Login',),
+          SizedBox(height: 10.h,),
+
+
+
           Align(
               alignment: Alignment.bottomCenter,
               child: Bottomcurve()),
