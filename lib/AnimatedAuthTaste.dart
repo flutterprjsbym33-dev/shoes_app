@@ -11,7 +11,8 @@ class Animatedauthtaste extends StatefulWidget {
 
 class _AnimatedauthtasteState extends State<Animatedauthtaste> {
 
-  bool showText = false;
+  bool showTitle = false;
+  bool showSubtitle = false;
   bool showCard = false;
 
   @override
@@ -20,7 +21,11 @@ class _AnimatedauthtasteState extends State<Animatedauthtaste> {
 
     // Text slides first
     Future.delayed(const Duration(milliseconds: 700), () {
-      setState(() => showText = true);
+      setState(() => showTitle = true);
+    });
+
+    Future.delayed(const Duration(milliseconds: 1200), () {
+      setState(() => showSubtitle = true);
     });
 
     // Card scales after
@@ -42,11 +47,11 @@ class _AnimatedauthtasteState extends State<Animatedauthtaste> {
             top: 85,
             left: 25,
             child: AnimatedSlide(
-              offset: showText ? Offset.zero : const Offset(-1, 0),
+              offset: showTitle ? Offset.zero : const Offset(-1, 0),
               duration: const Duration(seconds: 1),
               curve: Curves.easeOut,
               child: AnimatedOpacity(
-                opacity: showText ? 1 : 0,
+                opacity: showTitle ? 1 : 0,
                 duration: const Duration(seconds: 1),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,13 +65,24 @@ class _AnimatedauthtasteState extends State<Animatedauthtaste> {
                       ),
                     ),
                     const SizedBox(height: 6),
-                    Text(
-                      "Explore and Enjoy amazing shoes deal with us",
-                      style: TextStyle(
-                        color: Colors.grey.shade300,
-                        fontSize: 16,
-                      ),
-                    ),
+
+                    AnimatedSlide(
+                        offset: showSubtitle ? Offset.zero:Offset(-1, 0),
+                        duration: Duration(seconds: 1),
+                      curve: Curves.easeInOut,
+                      child: AnimatedOpacity(
+                          opacity: showSubtitle ? 1 : 0,
+                          duration: Duration(seconds: 1),
+                      child: Text(
+                        "Explore and Enjoy amazing shoes deal with us",
+                        style: TextStyle(
+                          color: Colors.grey.shade300,
+                          fontSize: 16,
+                        ),
+                      ),),
+
+                    )
+
                   ],
                 ),
               ),
