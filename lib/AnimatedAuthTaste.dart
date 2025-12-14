@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shoe/widgets/AnimatedCard.dart';
+import 'package:shoe/widgets/AnimatedTextWidget.dart';
 import 'package:shoe/widgets/BottomCurve.dart';
 import 'package:shoe/widgets/Topcurve.dart';
 
@@ -29,7 +31,7 @@ class _AnimatedauthtasteState extends State<Animatedauthtaste> {
     });
 
     // Card scales after
-    Future.delayed(const Duration(milliseconds: 1200), () {
+    Future.delayed(const Duration(milliseconds: 1450), () {
       setState(() => showCard = true);
     });
   }
@@ -46,78 +48,13 @@ class _AnimatedauthtasteState extends State<Animatedauthtaste> {
           Positioned(
             top: 85,
             left: 25,
-            child: AnimatedSlide(
-              offset: showTitle ? Offset.zero : const Offset(-1, 0),
-              duration: const Duration(seconds: 1),
-              curve: Curves.easeOut,
-              child: AnimatedOpacity(
-                opacity: showTitle ? 1 : 0,
-                duration: const Duration(seconds: 1),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Welcome Back",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 27,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-
-                    AnimatedSlide(
-                        offset: showSubtitle ? Offset.zero:Offset(-1, 0),
-                        duration: Duration(seconds: 1),
-                      curve: Curves.easeInOut,
-                      child: AnimatedOpacity(
-                          opacity: showSubtitle ? 1 : 0,
-                          duration: Duration(seconds: 1),
-                      child: Text(
-                        "Explore and Enjoy amazing shoes deal with us",
-                        style: TextStyle(
-                          color: Colors.grey.shade300,
-                          fontSize: 16,
-                        ),
-                      ),),
-
-                    )
-
-                  ],
-                ),
-              ),
+            child: Animatedtextwidget(),
             ),
-          ),
 
-          Center(
-            child: AnimatedScale(
-              scale: showCard ? 1 : 0,
-              duration: const Duration(milliseconds: 600),
-              curve: Curves.easeOutBack,
-              child: Container(
-                height: 400,
-                width: 320,
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 20,
-                      color: Colors.black.withOpacity(0.15),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: const [
-                    TextField(decoration: InputDecoration(labelText: "Email")),
-                    SizedBox(height: 16),
-                    TextField(decoration: InputDecoration(labelText: "Password")),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          AnimatedCardwidget(),
+
+
+
 
 
 
