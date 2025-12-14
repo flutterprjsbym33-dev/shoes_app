@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 
@@ -60,7 +61,7 @@ class _AnimatedtextwidgetState extends State<Animatedtextwidget> {
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 27,
+                    fontSize: 27.sp,
                   ),
                 ),
             ),
@@ -79,7 +80,7 @@ class _AnimatedtextwidgetState extends State<Animatedtextwidget> {
              subTitle,
               style: TextStyle(
                 color: Colors.grey.shade300,
-                fontSize: 16,
+                fontSize: 16.sp,
               ),
             ),),
 

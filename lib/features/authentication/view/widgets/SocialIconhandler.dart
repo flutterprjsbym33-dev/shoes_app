@@ -12,7 +12,7 @@ class SocialIconHandler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
-      height: 50.h,
+
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -20,7 +20,15 @@ class SocialIconHandler extends StatelessWidget {
         children: [
           Text(hint,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
           SizedBox(height: 6.h,),
-          SocailIcon(path: socialIconPath1,onSocailIconTap: onSocialIconTap,)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SocailIcon(path: socialIconPath1,onSocailIconTap: onSocialIconTap,),
+              SizedBox(width: 20.w,),
+              SocailIcon(path: socialIconPath2,onSocailIconTap: onSocialIconTap,),
+            ],
+          )
         ],
       ),
 

@@ -42,54 +42,69 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
         duration: const Duration(milliseconds: 900),
         curve: Curves.easeOutBack,
         child: Container(
-          height: 350.h,
-          width: 320.w,
+          height: 480.h,
+          width: 340.w,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
                 blurRadius: 20,
-
               ),
             ],
           ),
-          child: Column(
-            children: [
-              Expanded(
-                child: Card(
-                  elevation: 4
-                  ,
-                  child: Padding(
-                    padding: const EdgeInsets.all( 8.0),
-                    child: Column(
-                      children:  [
+          child:  Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+              elevation: 4,
+              child: Padding(
+                padding: EdgeInsets.all(6),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
 
-                        Center(child: Text(hint,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w600,color: Colors.black),)),
-                        SizedBox(height: 15.h,),
-                        CustomTextBox(hint: "Email", callback: (){}, iconData: Icons.email),
-                        SizedBox(height: 15.h),
-                        CustomTextBox(hint: "Password", callback: (){}, iconData: Icons.password),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: TextButton(onPressed: (){}, child: Text("Forgot Password?")),
+                         Column(
+                          children:  [
+
+                            Center(child: Text(hint,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w600,color: Colors.black),)),
+                            SizedBox(height: 15.h,),
+                            CustomTextBox(hint: "Email", callback: (){}, iconData: Icons.email),
+                            SizedBox(height: 15.h),
+                            CustomTextBox(hint: "Password", callback: (){}, iconData: Icons.password),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: TextButton(onPressed: (){}, child: Text("Forgot Password?")),
+                            ),
+                            SizedBox(height: 10.h),
+                            Custombutton(hint: "Login"),
+                            SizedBox(height: 20.h),
+                            SocialIconHandler(
+                              hint: "Or login with",
+                              socialIconPath1: "assets/images/gg.png",
+                              socialIconPath2: "assets/images/facebook.png",
+                              onSocialIconTap: () {},
+                            ),
+                            SizedBox(height: 12.h,),
+                            TextButton(onPressed: (){}, child: Text("Didn't Have an Account?"))
+
+                          ],
                         ),
-                        SizedBox(height: 10.h),
-                        Custombutton(hint: "Login")
 
-                      ],
-                    ),
-                  ),
+
+
+
+
+
+                  ],
                 ),
               ),
-
-
-
-            ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+
 
   }
 }

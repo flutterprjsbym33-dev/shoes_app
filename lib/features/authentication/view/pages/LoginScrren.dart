@@ -25,13 +25,17 @@ class _LoginscrrenState extends State<Loginscrren> {
               child: Topcurve()),
 
           Positioned(
-            top: 85,
+            top: 100,
             left: 25,
             child: Animatedtextwidget(title: 'Welcome Back',
               subTitle:  "Explore and Enjoy amazing shoes deal with us",),
           ),
 
-          AnimatedCardwidget(hint: 'Login',),
+          Positioned(
+            top: 230.h,
+              left: 25.w,
+              right: 25.w,
+              child: AnimatedCardwidget(hint: 'Login',)),
           SizedBox(height: 10.h,),
 
 

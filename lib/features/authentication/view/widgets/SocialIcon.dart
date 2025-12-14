@@ -9,8 +9,8 @@ class SocailIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-
-      backgroundImage: AssetImage(path),
+radius: 20.r,
+      backgroundImage: AssetImage(path)
     );
   }
 }
