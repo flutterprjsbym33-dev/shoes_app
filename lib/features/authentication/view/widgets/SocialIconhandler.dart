@@ -19,7 +19,7 @@ class SocialIconHandler extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(hint,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
-          SizedBox(height: 6.h,),
+          SizedBox(height: 17.h,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,

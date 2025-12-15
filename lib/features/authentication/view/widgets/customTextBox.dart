@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextBox extends StatefulWidget {
   String hint;
@@ -29,7 +30,7 @@ class _CustomTextBoxState extends State<CustomTextBox> {
     return LayoutBuilder(
       builder: (context,constraints) {
         return SizedBox(
-          height: height*0.08,
+          height: 60.h,
           width: constraints.maxWidth,
           child: Expanded(
             child: TextField(

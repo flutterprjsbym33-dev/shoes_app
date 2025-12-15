@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shoe/core/utils/AuthType.dart';
-import 'package:shoe/features/authentication/view/widgets/SocialIconhandler.dart';
 
+import '../../../../core/utils/AuthType.dart';
 import '../widgets/AnimatedCard.dart';
 import '../widgets/AnimatedTextWidget.dart';
 import '../widgets/BottomCurve.dart';
 import '../widgets/Topcurve.dart';
 
-class Loginscrren extends StatefulWidget {
-  const Loginscrren({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<Loginscrren> createState() => _LoginscrrenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginscrrenState extends State<Loginscrren> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         children: [
@@ -29,15 +27,15 @@ class _LoginscrrenState extends State<Loginscrren> {
           Positioned(
             top: 100,
             left: 25,
-            child: Animatedtextwidget(title: 'Welcome Back',
+            child: Animatedtextwidget(title: 'Create Account',
               subTitle:  "Explore and Enjoy amazing shoes deal with us",),
           ),
 
           Positioned(
-            top: 230.h,
+              top: 230.h,
               left: 25.w,
               right: 25.w,
-              child: AnimatedCardwidget(hint: 'Login',authType: AuthType.Login,)),
+              child: AnimatedCardwidget(hint: 'SignUp',authType: AuthType.SignUp,)),
           SizedBox(height: 10.h,),
 
 
