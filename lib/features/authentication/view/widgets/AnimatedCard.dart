@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoe/core/utils/AuthType.dart';
+import 'package:shoe/features/authentication/view/pages/LoginScrren.dart';
 import 'package:shoe/features/authentication/view/pages/SignUpScreen.dart';
 import 'package:shoe/features/authentication/view/widgets/CustomButton.dart';
 import 'package:shoe/features/authentication/view/widgets/SocialIcon.dart';
@@ -31,7 +32,7 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
     super.initState();
   authType = widget.authType;
     hint = widget.hint;
-    Future.delayed(const Duration(milliseconds: 1500), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       setState(() => showCard = true);
     });
   }
@@ -43,7 +44,7 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
     return Center(
       child: AnimatedScale(
         scale: showCard ? 1 : 0,
-        duration: const Duration(milliseconds: 1100),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.easeOutBack,
         child: Container(
           width: 340.w,
@@ -114,7 +115,9 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
                              authType == AuthType.Login ? TextButton(onPressed: (){
                                Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
                              }, child: Text("Didn't Have an Account?")):
-                             TextButton(onPressed: (){}, child: Text("Already Have an Account?"))
+                             TextButton(onPressed: (){
+                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Loginscrren()));
+                             }, child: Text("Already Have an Account?"))
                             ],
                                                    ),
                          ),

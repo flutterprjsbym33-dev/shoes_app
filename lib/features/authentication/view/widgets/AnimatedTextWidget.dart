@@ -30,11 +30,11 @@ class _AnimatedtextwidgetState extends State<Animatedtextwidget> {
     subTitle = widget.subTitle;
 
     // Text slides first
-    Future.delayed(const Duration(milliseconds: 700), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       setState(() => showTitle = true);
     });
 
-    Future.delayed(const Duration(milliseconds: 1000), () {
+    Future.delayed(const Duration(milliseconds: 700), () {
       setState(() => showSubtitle = true);
     });
 
@@ -50,11 +50,11 @@ class _AnimatedtextwidgetState extends State<Animatedtextwidget> {
       children: [
         AnimatedSlide(
           offset: showTitle ? Offset.zero : const Offset(-1, 0),
-          duration: const Duration(milliseconds: 800),
+          duration: const Duration(milliseconds: 500),
           curve: Curves.easeInBack,
           child: AnimatedOpacity(
             opacity: showTitle ? 1 : 0,
-            duration: const Duration(seconds: 1),
+            duration: const Duration(milliseconds: 700),
             child:
                  Text(
                   title,
@@ -71,11 +71,11 @@ class _AnimatedtextwidgetState extends State<Animatedtextwidget> {
 
         AnimatedSlide(
           offset: showSubtitle ? Offset.zero:Offset(-1, 0),
-          duration: Duration(seconds: 1),
+          duration: Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           child: AnimatedOpacity(
             opacity: showSubtitle ? 1 : 0,
-            duration: Duration(seconds: 1),
+            duration: Duration(milliseconds:700),
             child: Text(
              subTitle,
               style: TextStyle(

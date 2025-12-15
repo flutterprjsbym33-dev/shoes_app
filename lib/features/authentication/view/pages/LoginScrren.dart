@@ -19,6 +19,7 @@ class _LoginscrrenState extends State<Loginscrren> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: [
@@ -27,16 +28,16 @@ class _LoginscrrenState extends State<Loginscrren> {
               child: Topcurve()),
 
           Positioned(
-            top: 100,
-            left: 25,
+            top: height*0.12,
+            left: width*0.03,
             child: Animatedtextwidget(title: 'Welcome Back',
               subTitle:  "Explore and Enjoy amazing shoes deal with us",),
           ),
 
           Positioned(
-            top: 230.h,
-              left: 25.w,
-              right: 25.w,
+            top:height*0.26,
+              left: width*0.025,
+              right: width*0.025,
               child: AnimatedCardwidget(hint: 'Login',authType: AuthType.Login,)),
           SizedBox(height: 10.h,),
 

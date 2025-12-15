@@ -15,8 +15,11 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: [
@@ -25,16 +28,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Topcurve()),
 
           Positioned(
-            top: 100,
-            left: 25,
+            top:height*0.12,
+            left: width*0.03,
             child: Animatedtextwidget(title: 'Create Account',
               subTitle:  "Explore and Enjoy amazing shoes deal with us",),
           ),
 
           Positioned(
-              top: 230.h,
-              left: 25.w,
-              right: 25.w,
+              top:height*0.25,
+              left: width*0.025,
+              right: width*0.025,
               child: AnimatedCardwidget(hint: 'SignUp',authType: AuthType.SignUp,)),
           SizedBox(height: 10.h,),
 
