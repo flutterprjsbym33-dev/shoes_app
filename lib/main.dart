@@ -8,6 +8,8 @@ import 'package:shoe/features/authentication/view/pages/LoginScrren.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
