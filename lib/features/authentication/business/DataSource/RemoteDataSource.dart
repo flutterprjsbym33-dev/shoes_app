@@ -1,61 +1,88 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shoe/features/authentication/business/model/UserModel.dart';
 import 'package:shoe/features/authentication/domain/authEntity/Entity.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 
-class RemoteDataSource{
+class RemoteDataSource {
 
-FirebaseAuth firebaseAuth;
-SupabaseClient supabaseClient;
+  GoogleSignIn googleSignIn;
 
-RemoteDataSource({required this.firebaseAuth,required this.supabaseClient});
+  FirebaseAuth firebaseAuth;
+  SupabaseClient supabaseClient;
 
-
-
-Future<UserEntity> signup({ required String fullName, required String email,required String password}) async
-{
-  final getUser =  await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-  final id = getUser.user!.uid;
-  final userEmail = getUser.user!.email;
-
-  final userModel = await supabaseClient.from('user').insert({
-    "id": id,
-    'email':email,
-    'name':fullName,
-    'created_at':  DateTime.now(),
-
-  });
-
-  final user = UserModel.fromJson(userModel);
-
-  return user;
+  RemoteDataSource({required this.firebaseAuth, required this.supabaseClient,required this.googleSignIn});
 
 
+  User? get currentUser => firebaseAuth.currentUser;
 
+  Stream<User?> get authStateChange => firebaseAuth.authStateChanges();
+
+
+  Future<UserEntity> signup(
+      { required String fullName, required String email, required String password}) async
+  {
+    final getUser = await firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    final id = getUser.user!.uid;
+    final userEmail = getUser.user!.email;
+    final userModel = await supabaseClient.from('user').insert({
+      "id": id,
+      'email': email,
+      'name': fullName,
+      'created_at': DateTime.now(),
+      'profile_img':"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDuPAUb7pudPMvRNe0BqF7mxCumh9QN7WKyA&s"
+    });
+    final user = UserModel.fromJson(userModel);
+    return user;
+  }
+
+  Future<UserModel> login(
+      { required String email, required String password}) async
+  {
+    final getUser = await firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
+    final id = getUser.user!.uid;
+    final userEmail = getUser.user!.email;
+    final uid = await firebaseAuth.currentUser!.uid;
+    final userData = await supabaseClient
+        .from('user')
+        .select()
+        .eq('id', uid)
+        .single();
+    final user = UserModel.fromJson(userData);
+    return user;
+  }
+
+
+  Future<void> resetPassword(String email) async {
+    await firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+
+  Future<void> signInWithGoogle() async
+  {
+    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth =
+    await googleUser!.authentication;
+
+    final OAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    final UserCredential userCredential =
+    await firebaseAuth.signInWithCredential(credential);
+
+    final User? user = userCredential.user;
+
+    await supabaseClient.from('user').insert({
+      "id": user!.uid ,
+      'email': user.email,
+      'name': user.displayName,
+      'created_at': DateTime.now(),
+      'profile_img':user.photoURL
+    });
+  }
 }
 
-Future<UserModel> login({ required String email,required String password}) async
-{
-  final getUser =  await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-  final id = getUser.user!.uid;
-  final userEmail = getUser.user!.email;
-
-  final  uid = await firebaseAuth.currentUser!.uid;
-
-  final userData =  await supabaseClient.from('user').select().eq('id', uid).single();
-
-  final user = UserModel.fromJson(userData);
-
-
-
-
-
-  return user;
-
-
-
-}
-
-
-
-}
