@@ -11,7 +11,6 @@ import '../../domain/AuthFailure.dart';
 class RemoteDataSource {
 
   GoogleSignIn googleSignIn;
-
   FirebaseAuth firebaseAuth;
   SupabaseClient supabaseClient;
 
@@ -39,6 +38,7 @@ class RemoteDataSource {
        'profile_img':"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDuPAUb7pudPMvRNe0BqF7mxCumh9QN7WKyA&s"
      });
      final user = UserModel.fromJson(userModel);
+
      return user;
 
    } on FirebaseAuthException catch (e){
@@ -100,7 +100,7 @@ class RemoteDataSource {
   }
 
 
-  Future<void> signInWithGoogle() async
+  Future<UserModel> signInWithGoogle() async
   {
     try{
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
@@ -117,13 +117,22 @@ class RemoteDataSource {
 
       final User? user = userCredential.user;
 
-      await supabaseClient.from('user').insert({
+    final userData =   await supabaseClient.from('user').insert({
         "id": user!.uid ,
         'email': user.email,
         'name': user.displayName,
         'created_at': DateTime.now(),
         'profile_img':user.photoURL
       });
+
+    final userGoteed =  await UserModel.fromJson(userData);
+
+    return userGoteed;
+
+
+
+
+
     } on SocketException catch (e){
       throw NetworkFailure();
 

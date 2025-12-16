@@ -11,5 +11,11 @@ abstract class AuthRepositries{
   Future<UserEntity> login({
     required email,
     required password
-});
+    });
+
+  Future<void> forgotPassword({required email});
+
+  Future<UserEntity> googleSignIn();
+
+
 }
