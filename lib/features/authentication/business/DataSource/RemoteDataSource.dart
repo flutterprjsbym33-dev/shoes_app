@@ -22,7 +22,7 @@ class RemoteDataSource {
   Stream<User?> get authStateChange => firebaseAuth.authStateChanges();
 
 
-  Future<UserEntity> signup(
+  Future<UserModel> signup(
       { required String fullName, required String email, required String password}) async
   {
    try{

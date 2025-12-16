@@ -5,7 +5,7 @@ class LoginUseCase{
   AuthRepositries authrepositries;
   LoginUseCase({required this.authrepositries});
 
-  Future<UserEntity> call(String userName,String email,String password)
+  Future<UserEntity> call(String email,String password)
   {
     return authrepositries.login(
         email: email,

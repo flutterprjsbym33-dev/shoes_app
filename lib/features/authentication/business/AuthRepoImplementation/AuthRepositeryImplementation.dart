@@ -1,4 +1,5 @@
 import 'package:shoe/features/authentication/business/DataSource/RemoteDataSource.dart';
+import 'package:shoe/features/authentication/business/model/UserModel.dart';
 import 'package:shoe/features/authentication/domain/authEntity/Entity.dart';
 import 'package:shoe/features/authentication/domain/authRepo/AuthRepositries.dart';
 
@@ -20,8 +21,8 @@ class AuthRepositeryImplementation extends AuthRepositries {
   }
 
   @override
-  Future<UserEntity> signIn({required userName, required email, required password})async {
-    final user = await  remoteDataSource.login(email: email, password: password);
+  Future<UserModel> signIn({required userName, required email, required password})async {
+    final user = await  remoteDataSource.signup(fullName: userName,email: email, password: password);
     userLocalDataSource.catchUSer(user);
     return user;
   }
