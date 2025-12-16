@@ -1,9 +1,9 @@
 import '../authEntity/Entity.dart';
 import '../authRepo/AuthRepositries.dart';
 
-class LoginUser{
+class LoginUseCase{
   AuthRepositries authrepositries;
-  LoginUser({required this.authrepositries});
+  LoginUseCase({required this.authrepositries});
 
   Future<UserEntity> call(String userName,String email,String password)
   {
