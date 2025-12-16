@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoe/core/utils/AuthType.dart';
+import 'package:shoe/features/authentication/view/bloc/AuthMainBloc.dart';
+import 'package:shoe/features/authentication/view/bloc/AuthenticationMainState.dart';
 import 'package:shoe/features/authentication/view/pages/LoginScrren.dart';
 import 'package:shoe/features/authentication/view/pages/SignUpScreen.dart';
 import 'package:shoe/features/authentication/view/widgets/CustomButton.dart';
@@ -100,7 +103,16 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
                                 child: TextButton(onPressed: (){}, child: Text("Forgot Password?")),
                               ) : SizedBox(),
                               SizedBox(height: 10.h),
-                               authType == AuthType.Login ? Custombutton(hint: "Login",onTapLoginSignup: (){},) : Custombutton(hint: "SignUp",onTapLoginSignup: (){},),
+                               authType == AuthType.Login ?
+                               BlocConsumer<AuthMainBloc,AuthenticationMainState>(
+                                 listener: (context,state){
+
+                                 },
+                                 builder: (context,state) {
+                                   return Custombutton(hint: "Login",onTapLoginSignup: (){},);
+                                 }
+                               ) :
+                               Custombutton(hint: "SignUp",onTapLoginSignup: (){},),
                                SizedBox(height: 21.h),
                               Row(
                                 children: [

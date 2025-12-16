@@ -18,9 +18,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../features/authentication/domain/useCases/AuthUseCase.dart';
 import '../../firebase_options.dart';
 
-class initializer{
-
-  static void initAll()async
+class Initializer{
+ static final getIt = GetIt.instance;
+  static Future<void> initAll()async
   {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -34,34 +34,6 @@ class initializer{
       url: AppConstants.url,
       anonKey: AppConstants.anonKry,
     );
-
-    final  getIt = GetIt.instance;
-    
-    getIt.registerLazySingleton<FirebaseAuth>(()=>FirebaseAuth.instance);
-
-    getIt.registerLazySingleton<SupabaseClient>(()=>Supabase.instance.client);
-
-    getIt.registerLazySingleton<GoogleSignIn>(()=>GoogleSignIn());
-
-    getIt.registerLazySingleton<RemoteDataSource>(()=>RemoteDataSource(firebaseAuth: getIt<FirebaseAuth>(),
-        supabaseClient: getIt<SupabaseClient>(), googleSignIn: getIt<GoogleSignIn>()));
-
-    getIt.registerLazySingleton<UserLocalDataSource>(()=>UserLocalDataSource(box: Hive.box('user')));
-
-
-    getIt.registerLazySingleton<AuthRepositries>(()=>AuthRepositeryImplementation(remoteDataSource: getIt<RemoteDataSource>(),
-        userLocalDataSource: getIt<UserLocalDataSource>()));
-
-    getIt.registerLazySingleton<SignUpWithFirebase>(()=>SignUpWithFirebase(authrepositries: getIt<AuthRepositeryImplementation>()));
-
-
-    getIt.registerLazySingleton<LoginUseCase>(()=>LoginUseCase(authrepositries: getIt<AuthRepositeryImplementation>()));
-
-    getIt.registerLazySingleton<GoogleSignInUseCase>(()=>GoogleSignInUseCase(authRepositries: getIt<AuthRepositeryImplementation>()));
-
-    getIt.registerFactory<AuthMainBloc>(()=>AuthMainBloc(loginUseCase: getIt<LoginUseCase>(),
-        googleSignInUseCase: getIt<GoogleSignInUseCase>(),
-        signUpWithFirebase: getIt<SignUpWithFirebase>()));
 
 
   }

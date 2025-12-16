@@ -32,8 +32,7 @@ class _CustomTextBoxState extends State<CustomTextBox> {
         return SizedBox(
           height: 60.h,
           width: constraints.maxWidth,
-          child: Expanded(
-            child: TextField(
+          child:  TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15)
@@ -43,7 +42,7 @@ class _CustomTextBoxState extends State<CustomTextBox> {
               ),
             
             ),
-          ),
+
         );
       }
     );

@@ -61,6 +61,3 @@ class TopSubtleWaveClipper extends CustomClipper<Path> {
 
 
 
-// NOTE: The visual in your image is actually an **inverted** version of a
-// standard top wave. Since this green part is at the bottom, we clip the
-// top of the green container to create the curve.
