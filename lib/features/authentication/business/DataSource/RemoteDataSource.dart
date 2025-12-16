@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shoe/features/authentication/business/model/UserModel.dart';
 import 'package:shoe/features/authentication/domain/authEntity/Entity.dart';
@@ -27,7 +28,7 @@ class RemoteDataSource {
       { required String fullName, required String email, required String password}) async
   {
    try{
-     final getUser = await firebaseAuth.createUserWithEmailAndPassword(
+     final getUser = await FirebaseAuth.instance.createUserWithEmailAndPassword(
          email: email, password: password);
      final id = getUser.user!.uid;
      final userEmail = getUser.user!.email;
@@ -35,21 +36,29 @@ class RemoteDataSource {
        "id": id,
        'email': email,
        'name': fullName,
-       'created_at': DateTime.now(),
+       'created_at': DateTime.now().toIso8601String(),
        'profile_img':"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDuPAUb7pudPMvRNe0BqF7mxCumh9QN7WKyA&s"
-     });
+     }).select().single();
+     print("USER->>>>>>>>>>>>>>>>>> $userModel");
      final user = UserModel.fromJson(userModel);
 
      return user;
 
    } on FirebaseAuthException catch (e){
-     throw AuthnFailure(e.toString() ?? "Authentication Failed");
+     debugPrint("FirebaseAuthException code: ${e.code}");
+     debugPrint("FirebaseAuthException message: ${e.message}");
+     throw AuthnFailure( "Authentication Failed");
+
    } on SocketException catch (e)
     {
+      debugPrint("FirebaseAuthException code: ${e.toString()}");
+      debugPrint("FirebaseAuthException message: ${e.message}");
       throw NetworkFailure();
 
     } catch(e)
     {
+      debugPrint("FirebaseAuthException code: ${e.toString()}");
+
       throw ServerFailure();
     }
 
@@ -89,7 +98,7 @@ class RemoteDataSource {
      await firebaseAuth.sendPasswordResetEmail(email: email);
    }
    on FirebaseAuthException catch (e){
-     throw AuthnFailure(e.toString() ?? "Authentication Failed");
+     throw AuthnFailure("Authentication Failed");
    } on SocketException catch (e)
    {
      throw NetworkFailure();
@@ -122,9 +131,9 @@ class RemoteDataSource {
         "id": user!.uid ,
         'email': user.email,
         'name': user.displayName,
-        'created_at': DateTime.now(),
+      'created_at': DateTime.now().toIso8601String(),
         'profile_img':user.photoURL
-      });
+      }).select().single();
 
     final userGoteed =  await UserModel.fromJson(userData);
 

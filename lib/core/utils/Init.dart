@@ -22,13 +22,11 @@ class Initializer{
  static final getIt = GetIt.instance;
   static Future<void> initAll()async
   {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
 
-    Hive.initFlutter();
-    Hive.openBox('config');
-    Hive.openBox('user');
+
+    await Hive.initFlutter();
+   await  Hive.openBox('config');
+   await Hive.openBox('user');
 
     await Supabase.initialize(
       url: AppConstants.url,

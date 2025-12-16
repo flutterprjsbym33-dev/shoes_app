@@ -20,11 +20,11 @@ import '../../features/authentication/domain/useCases/AuthUseCase.dart';
 import '../../firebase_options.dart';
 
 
-class CrreateObj{
+class CreateObj{
 
   final  getIt = GetIt.instance;
 
-  void intALl()
+    void intALl()
   {
     getIt.registerLazySingleton<FirebaseAuth>(()=>FirebaseAuth.instance);
 
@@ -41,12 +41,12 @@ class CrreateObj{
     getIt.registerLazySingleton<AuthRepositries>(()=>AuthRepositeryImplementation(remoteDataSource: getIt<RemoteDataSource>(),
         userLocalDataSource: getIt<UserLocalDataSource>()));
 
-    getIt.registerLazySingleton<SignUpWithFirebase>(()=>SignUpWithFirebase(authrepositries: getIt<AuthRepositeryImplementation>()));
+    getIt.registerLazySingleton<SignUpWithFirebase>(()=>SignUpWithFirebase(authrepositries: getIt<AuthRepositries>()));
 
 
-    getIt.registerLazySingleton<LoginUseCase>(()=>LoginUseCase(authrepositries: getIt<AuthRepositeryImplementation>()));
+    getIt.registerLazySingleton<LoginUseCase>(()=>LoginUseCase(authrepositries: getIt<AuthRepositries>()));
 
-    getIt.registerLazySingleton<GoogleSignInUseCase>(()=>GoogleSignInUseCase(authRepositries: getIt<AuthRepositeryImplementation>()));
+    getIt.registerLazySingleton<GoogleSignInUseCase>(()=>GoogleSignInUseCase(authRepositries: getIt<AuthRepositries>()));
 
     getIt.registerFactory<AuthMainBloc>(()=>AuthMainBloc(loginUseCase: getIt<LoginUseCase>(),
         googleSignInUseCase: getIt<GoogleSignInUseCase>(),

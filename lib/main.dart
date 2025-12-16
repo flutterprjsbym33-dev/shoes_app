@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shoe/core/di/GetIt.dart';
 import 'package:shoe/core/utils/Init.dart';
 import 'package:shoe/features/authentication/view/bloc/AuthMainBloc.dart';
 import 'firebase_options.dart';
@@ -12,8 +13,11 @@ import 'package:shoe/features/authentication/view/pages/LoginScrren.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
  await Initializer.initAll();
+ CreateObj().intALl();
   runApp(const MyApp());
 }
 

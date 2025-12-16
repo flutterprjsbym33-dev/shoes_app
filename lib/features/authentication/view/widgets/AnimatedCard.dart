@@ -1,8 +1,11 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoe/TestHomeScreen.dart';
 import 'package:shoe/core/utils/AuthType.dart';
+import 'package:shoe/core/utils/snackbar.dart';
 import 'package:shoe/features/authentication/view/bloc/AuthMainBloc.dart';
 import 'package:shoe/features/authentication/view/bloc/AuthenticationMainState.dart';
 import 'package:shoe/features/authentication/view/pages/LoginScrren.dart';
@@ -11,6 +14,7 @@ import 'package:shoe/features/authentication/view/widgets/CustomButton.dart';
 import 'package:shoe/features/authentication/view/widgets/SocialIcon.dart';
 import 'package:shoe/features/authentication/view/widgets/customTextBox.dart';
 
+import '../bloc/AuthMainEvents.dart';
 import 'SocialIconhandler.dart';
 
 
@@ -92,27 +96,80 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
                            
                               Center(child: Text(hint,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w600,color: Colors.black),)),
                               SizedBox(height: 15.h,),
-                             authType == AuthType.SignUp ? CustomTextBox(hint: "FullName", callback: (){}, iconData: Icons.account_circle) : SizedBox(),
+                             authType == AuthType.SignUp ? CustomTextBox(hint: "FullName", callback: (){}, iconData: Icons.account_circle,controller: _fullName,) : SizedBox(),
                               SizedBox(height: 15.h,),
-                              CustomTextBox(hint: "Email", callback: (){}, iconData: Icons.email),
+                              CustomTextBox(hint: "Email", callback: (){}, iconData: Icons.email,controller: _email,),
                               SizedBox(height: 15.h),
-                              CustomTextBox(hint: "Password", callback: (){}, iconData: Icons.password),
+                              CustomTextBox(hint: "Password", callback: (){}, iconData: Icons.password,controller: _password,),
                               authType == AuthType.Login ?
                               Align(
                                 alignment: Alignment.bottomRight,
-                                child: TextButton(onPressed: (){}, child: Text("Forgot Password?")),
+                                child: TextButton(onPressed: () {
+
+                                }, child: Text("Forgot Password?")),
                               ) : SizedBox(),
                               SizedBox(height: 10.h),
                                authType == AuthType.Login ?
                                BlocConsumer<AuthMainBloc,AuthenticationMainState>(
                                  listener: (context,state){
+                                   if(state is LoginUserWithEmailSuccessState)
+                                     {
+                                       ShowSnacBar(context: context,
+                                           discrip: "Welcome again, ${state.user.userName}",
+                                           type: SnackBarType.Success);
+                                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Testhomescreen()));
+                                     }
+                                   if(state is LoginUserWithEmailErrorState)
+                                     {
+                                       ShowSnacBar(context: context,
+                                           discrip: " ${state.errMsg}",
+                                           type: SnackBarType.Error);
+                                     }
 
                                  },
                                  builder: (context,state) {
-                                   return Custombutton(hint: "Login",onTapLoginSignup: (){},);
+                                   if(state is LoginUserWithEmailLoadingState)
+                                     {
+                                       return Custombutton(hint: "Logging",onTapLoginSignup: (){},);
+                                     }
+                                   else {
+                                     return  Custombutton(hint: "Login",onTapLoginSignup: (){
+                                       context.read<AuthMainBloc>().add(LoginUserWithEmail(email: _email.text.trim(), password: _password.text.trim()));
+                                     },);
+                                   }
                                  }
                                ) :
-                               Custombutton(hint: "SignUp",onTapLoginSignup: (){},),
+                               BlocConsumer<AuthMainBloc,AuthenticationMainState>(
+                                   listener: (context,state){
+                                     if(state is SignUserWithEmailSuccessState)
+                                     {
+                                       ShowSnacBar(context: context,
+                                           discrip: "Welcome ${state.user.userName},& Thankyou for creating Acoount",
+                                           type: SnackBarType.Success);
+                                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Testhomescreen()));
+                                     }
+                                     if(state is SignUserWithEmailErrorState)
+                                     {
+                                       ShowSnacBar(context: context,
+                                           discrip: " ${state.errMsg}",
+                                           type: SnackBarType.Error);
+                                     }
+
+                                   },
+                                   builder: (context,state) {
+                                     if(state is SignUserWithEmailLoadingState)
+                                     {
+                                       return Custombutton(hint: "Signing",onTapLoginSignup: (){},);
+                                     }
+                                     else {
+                                       return  Custombutton(hint: "Signup",onTapLoginSignup: (){
+                                         context.read<AuthMainBloc>().add(SignInUserWithEmail(email: _email.text.trim(),
+                                             password: _password.text.trim(),
+                                             userName: _fullName.text));
+                                       },);
+                                     }
+                                   }
+                               ),
                                SizedBox(height: 21.h),
                               Row(
                                 children: [
@@ -131,7 +188,37 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SocailIcon(path: 'assets/images/gg.png', onSocailIconTap: (){}),
+                                  BlocConsumer<AuthMainBloc,AuthenticationMainState>(
+                                    listener: (context,state)
+                                      {
+                                        if(state is SignUserWithGoogleSuccessState)
+                                        {
+                                          ShowSnacBar(context: context,
+                                              discrip: "Welcome ${state.user.userName},& Thankyou ,Enjoy shopping with amazing app",
+                                              type: SnackBarType.Success);
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Testhomescreen()));
+                                        }
+                                        if(state is SignUserWithGoogleErrorState)
+                                        {
+                                          ShowSnacBar(context: context,
+                                              discrip: " ${state.errMsg}",
+                                              type: SnackBarType.Error);
+                                        }
+
+
+                                      },
+                                    builder: (context,state) {
+                                      if(state is SignUserWithGoogleLoadingState)
+                                        {
+                                          return SocailIcon(path: 'assets/images/ldg.png', onSocailIconTap: (){});
+                                        }
+                                      else{
+                                        return SocailIcon(path: 'assets/images/gg.png', onSocailIconTap: (){
+                                          context.read<AuthMainBloc>().add(SignInUserWithGoogle());
+                                        });
+                                      }
+                                    }
+                                  ),
                                   SizedBox(width: 45.w,),
                                   SocailIcon(path: 'assets/images/facebook.png', onSocailIconTap: (){}),
                            

@@ -28,6 +28,11 @@ class AuthMainBloc extends Bloc<AuthMainEvents,AuthenticationMainState>
   Future<void> signInWithEmail(SignInUserWithEmail event,Emitter<AuthenticationMainState> emit)async
   {
     try{
+      if(event.userName.isEmpty && event.password.isEmpty )
+        {
+          SignUserWithEmailErrorState("empty");
+
+        }
       emit(SignUserWithEmailLoadingState());
      final user =  await signUpWithFirebase.call(event.userName, event.email, event.password);
      emit(SignUserWithEmailSuccessState(user));
