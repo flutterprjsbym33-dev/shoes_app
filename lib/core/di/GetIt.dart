@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
@@ -18,25 +19,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../features/authentication/domain/useCases/AuthUseCase.dart';
 import '../../firebase_options.dart';
 
-class initializer{
 
-  static void initAll()async
+class CrreateObj{
+
+  final  getIt = GetIt.instance;
+
+  void intALl()
   {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
-    Hive.initFlutter();
-    Hive.openBox('config');
-    Hive.openBox('user');
-
-    await Supabase.initialize(
-      url: AppConstants.url,
-      anonKey: AppConstants.anonKry,
-    );
-
-    final  getIt = GetIt.instance;
-    
     getIt.registerLazySingleton<FirebaseAuth>(()=>FirebaseAuth.instance);
 
     getIt.registerLazySingleton<SupabaseClient>(()=>Supabase.instance.client);
@@ -63,7 +52,10 @@ class initializer{
         googleSignInUseCase: getIt<GoogleSignInUseCase>(),
         signUpWithFirebase: getIt<SignUpWithFirebase>()));
 
-
   }
+
+
+
+
 
 }

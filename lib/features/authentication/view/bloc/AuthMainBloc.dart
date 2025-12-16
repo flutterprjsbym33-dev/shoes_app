@@ -16,7 +16,11 @@ class AuthMainBloc extends Bloc<AuthMainEvents,AuthenticationMainState>
   AuthMainBloc({required this.loginUseCase,
     required this.googleSignInUseCase,
     required this.signUpWithFirebase})
-      :super(AuthInitialState()){
+      :super(AuthInitialState())
+  {
+    on<SignInUserWithEmail>(signInWithEmail);
+    on<LoginUserWithEmail>(logInWithEmail);
+    on<SignInUserWithGoogle>(sinInWithGoogle);
 
   }
 

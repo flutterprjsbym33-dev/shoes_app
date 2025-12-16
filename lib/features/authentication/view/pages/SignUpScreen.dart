@@ -21,6 +21,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
+
       body: Stack(
         children: [
           Align(

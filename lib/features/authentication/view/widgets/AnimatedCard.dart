@@ -23,6 +23,12 @@ AuthType authType;
 
 class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
 
+  TextEditingController _fullName = TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
+
+
+
   bool showCard = false;
   late final hint ;
   late final authType;
@@ -35,6 +41,14 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
     Future.delayed(const Duration(milliseconds: 500), () {
       setState(() => showCard = true);
     });
+  }
+
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    _fullName.dispose();
+    super.dispose();
   }
 
 
