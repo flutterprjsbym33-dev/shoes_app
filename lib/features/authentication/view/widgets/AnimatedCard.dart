@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shoe/TestHomeScreen.dart';
+import 'package:shoe/HomeScreen/pages/TestHomeScreen.dart';
 import 'package:shoe/core/utils/AuthType.dart';
 import 'package:shoe/core/utils/snackbar.dart';
 import 'package:shoe/features/authentication/view/bloc/AuthMainBloc.dart';
@@ -109,7 +109,7 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
                                 Align(
                                   alignment: Alignment.bottomRight,
                                   child: TextButton(onPressed: () {
-
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Testhomescreen()));
                                   }, child: Text("Forgot Password?")),
                                 ) : SizedBox(),
                                 SizedBox(height: 10.h),

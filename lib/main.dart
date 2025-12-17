@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:shoe/core/di/GetIt.dart';
 import 'package:shoe/core/utils/Init.dart';
 import 'package:shoe/features/authentication/view/bloc/AuthMainBloc.dart';
+import 'package:shoe/features/banners/view/bloc/FetchBannerMainBloc.dart';
 import 'firebase_options.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shoe/features/authentication/view/pages/LoginScrren.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       
       providers: [
-        BlocProvider<AuthMainBloc>(create: (context)=>Initializer.getIt<AuthMainBloc>())
+        BlocProvider<AuthMainBloc>(create: (context)=>Initializer.getIt<AuthMainBloc>()),
+        BlocProvider<FetchBannersMainBloc>(create: (context)=>Initializer.getIt<FetchBannersMainBloc>())
       ],
       child: ScreenUtilInit(
         designSize:   const Size(412, 846),
