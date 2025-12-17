@@ -1,4 +1,5 @@
 import 'package:dart_either/src/dart_either.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shoe/core/utils/CustomExpn.dart';
 import 'package:shoe/features/authentication/business/DataSource/RemoteDataSource.dart';
 import 'package:shoe/features/banners/data/datasource/BannerRemoteDataSource.dart';
@@ -33,6 +34,7 @@ class BannerRepoImplementaion extends BannerRepo {
         return Right(catched);
 
       } on CacheFailure{
+        debugPrint("Image Fetched Errorrrrrrrrrrr.");
         return Left(CacheFailure("No catched Banners"));
       }
     } on ServerFailure
@@ -42,6 +44,7 @@ class BannerRepoImplementaion extends BannerRepo {
         return Right(catched);
 
       } on CacheFailure{
+        debugPrint("Image Fetched Errorrrrrrrrrrr.");
         return Left(CacheFailure("No catched Banners"));
       }
 

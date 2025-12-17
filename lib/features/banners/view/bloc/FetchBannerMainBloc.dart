@@ -9,6 +9,8 @@ class FetchBannersMainBloc extends Bloc<FetchBannerMainEvent,FetchBannerMainStat
 
   FetchBannersMainBloc({required this.getBanner}) :super(FetchBannerInitialState()) {
 
+    on<FetchBannerEvent>(fetchBanners);
+
   }
 
 
@@ -16,6 +18,7 @@ class FetchBannersMainBloc extends Bloc<FetchBannerMainEvent,FetchBannerMainStat
   {
     emit(FetchBannerLoadingState());
     final result = await getBanner.call();
+    print(result);
     result.fold(
         ifLeft: (failure)=>emit(FetchBannersErrorState(errMSg: failure.message)),
         ifRight: (sucess)=>emit(FetchBannersSuccessState(banners: sucess)));
