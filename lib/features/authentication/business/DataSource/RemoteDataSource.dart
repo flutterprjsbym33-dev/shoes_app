@@ -32,7 +32,7 @@ class RemoteDataSource {
          email: email, password: password);
      final id = getUser.user!.uid;
      final userEmail = getUser.user!.email;
-     final userModel = await supabaseClient.from('user').insert({
+     final userModel = await supabaseClient.from('user').upsert({
        "id": id,
        'email': email,
        'name': fullName,
