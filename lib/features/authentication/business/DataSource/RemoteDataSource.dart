@@ -127,7 +127,9 @@ class RemoteDataSource {
 
       final User? user = userCredential.user;
 
-    final userData =   await supabaseClient.from('user').insert({
+
+
+    final userData =   await supabaseClient.from('user').upsert({
         "id": user!.uid ,
         'email': user.email,
         'name': user.displayName,
@@ -144,10 +146,12 @@ class RemoteDataSource {
 
 
     } on SocketException catch (e){
+      debugPrint(e.toString());
       throw NetworkFailure();
 
     }
     catch(e){
+      debugPrint(e.toString());
       throw ServerFailure();
     }
   }
