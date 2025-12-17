@@ -18,6 +18,7 @@ import 'package:shoe/features/banners/data/bannerRepoImp/BannerRepoimp.dart';
 import 'package:shoe/features/banners/data/datasource/BannerRemoteDataSource.dart';
 import 'package:shoe/features/banners/data/datasource/BannersLocalDataSource.dart';
 import 'package:shoe/features/banners/domain/bannerRepo/BannerRepo.dart';
+import 'package:shoe/features/banners/domain/usecases/getbanner.dart';
 import 'package:shoe/features/banners/view/bloc/FetchBannerMainBloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -65,7 +66,10 @@ class CreateObj{
     getIt.registerLazySingleton<BannerRepo>(()=>BannerRepoImplementaion(bannerRemoteDataSource:getIt<BannerRemoteDataSource>() ,
         bannersLocalDataSource: getIt<BannersLocalDataSource>()));
 
+    getIt.registerLazySingleton<GetBanner>(()=>GetBanner(bannerRepo: getIt<BannerRepo>()));
 
+
+    getIt.registerFactory<FetchBannersMainBloc>(()=>FetchBannersMainBloc(getBanner: getIt<GetBanner>()));
 
 
 
