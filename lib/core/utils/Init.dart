@@ -27,6 +27,7 @@ class Initializer{
     await Hive.initFlutter();
    await  Hive.openBox('config');
    await Hive.openBox('user');
+   await Hive.openBox('banners');
 
     await Supabase.initialize(
       url: AppConstants.url,

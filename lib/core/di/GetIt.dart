@@ -14,6 +14,11 @@ import 'package:shoe/features/authentication/domain/authRepo/AuthRepositries.dar
 import 'package:shoe/features/authentication/domain/useCases/GoogleSignInUseCase.dart';
 import 'package:shoe/features/authentication/domain/useCases/LoginUser.dart';
 import 'package:shoe/features/authentication/view/bloc/AuthMainBloc.dart';
+import 'package:shoe/features/banners/data/bannerRepoImp/BannerRepoimp.dart';
+import 'package:shoe/features/banners/data/datasource/BannerRemoteDataSource.dart';
+import 'package:shoe/features/banners/data/datasource/BannersLocalDataSource.dart';
+import 'package:shoe/features/banners/domain/bannerRepo/BannerRepo.dart';
+import 'package:shoe/features/banners/view/bloc/FetchBannerMainBloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/authentication/domain/useCases/AuthUseCase.dart';
@@ -51,6 +56,18 @@ class CreateObj{
     getIt.registerFactory<AuthMainBloc>(()=>AuthMainBloc(loginUseCase: getIt<LoginUseCase>(),
         googleSignInUseCase: getIt<GoogleSignInUseCase>(),
         signUpWithFirebase: getIt<SignUpWithFirebase>()));
+
+
+    getIt.registerLazySingleton<BannerRemoteDataSource>(()=>BannerRemoteDataSource(supabaseClient: getIt<SupabaseClient>()));
+
+    getIt.registerLazySingleton<BannersLocalDataSource>(()=>BannersLocalDataSource(box: Hive.box('banners')));
+
+    getIt.registerLazySingleton<BannerRepo>(()=>BannerRepoImplementaion(bannerRemoteDataSource:getIt<BannerRemoteDataSource>() ,
+        bannersLocalDataSource: getIt<BannersLocalDataSource>()));
+
+
+
+
 
   }
 
