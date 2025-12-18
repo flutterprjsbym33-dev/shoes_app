@@ -17,12 +17,16 @@ class _TesthomescreenState extends State<Testhomescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-         CustomAppbar(),
-          FetchedBanner(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 8),
+        child: CustomScrollView(
+          slivers: [
+           CustomAppbar(),
+            FetchedBanner(),
 
-        ],
+
+          ],
+        ),
       )
     );
   }

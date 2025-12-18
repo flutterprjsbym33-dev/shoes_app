@@ -23,6 +23,8 @@ dependencies:
   cherry_toast: ^1.13.0
   dart_either: ^2.0.0
   shimmer_animation: ^2.2.2+1
+  cached_network_image: ^3.4.1
+  sqflite: ^2.3.3
 
 dev_dependencies:
   flutter_test:

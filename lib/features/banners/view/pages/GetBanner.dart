@@ -5,7 +5,7 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:shoe/core/utils/snackbar.dart';
 import 'package:shoe/features/banners/view/bloc/FetchBannerMainBloc.dart';
 import 'package:shoe/features/banners/view/bloc/FetchBannerMainSatate.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import '../bloc/FetchBannerEvent.dart';
 
 class GetBanners extends StatefulWidget{
@@ -42,7 +42,6 @@ class _GetBanners extends State<GetBanners> {
           if(state is FetchBannerLoadingState)
             {
               return SizedBox(
-                height: height*0.22,
                 width: double.infinity,
                 child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10.h,vertical: 10.h) ,
@@ -69,30 +68,46 @@ class _GetBanners extends State<GetBanners> {
             {
 
               return SizedBox(
-                height: height*0.3,
+
                 width: double.infinity,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.h,vertical: 10.h) ,
-                  child: ClipRRect(
+                child:
+                  ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: PageView.builder(
                       itemCount: state.banners.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context,index){
-                        return ClipRRect(
-                          child: Image.network(state.banners[index].imageUrl,),
-                        );
+                        return
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: CachedNetworkImage(
+                              imageUrl: state.banners[index].imageUrl,
+                              fit: BoxFit.fitWidth,
+                              placeholder: (context, url) => Shimmer(
+                                duration: Duration(seconds: 3), //Default value
+                                interval: Duration(seconds: 5), //Default value: Duration(seconds: 0)
+                                color: Colors.white, //Default value
+                                colorOpacity: 0, //Default value
+                                enabled: true, //Default value
+                                direction: ShimmerDirection.fromLTRB(),  //Default Value
+                                child: Container(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              errorWidget: (context, url, error) => Icon(Icons.error),
+                            ),
+                          );
+
                         }
                     ),
                   ),
-                ),
+
 
               );
 
             }
           else{
             return SizedBox(
-              height: height*0.22,
               width: double.infinity,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.h,vertical: 10.h) ,
@@ -101,12 +116,12 @@ class _GetBanners extends State<GetBanners> {
                   child: Shimmer(
                     duration: Duration(seconds: 3), //Default value
                     interval: Duration(seconds: 5), //Default value: Duration(seconds: 0)
-                    color: Colors.white, //Default value
+                    color:  Colors.white, //Default value
                     colorOpacity: 0, //Default value
                     enabled: true, //Default value
                     direction: ShimmerDirection.fromLTRB(),  //Default Value
                     child: Container(
-                      color: Colors.deepPurple,
+                      color: Colors.grey.shade400,
                     ),
                   ),
                 ),

@@ -7,10 +7,10 @@ class CustomAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+
   automaticallyImplyLeading: false,
       pinned: true,
-      expandedHeight: 90.h,
-      toolbarHeight: 90.h,
+      toolbarHeight: 32.h,
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(
           padding: EdgeInsets.symmetric(horizontal: 0.h),
@@ -19,7 +19,7 @@ class CustomAppbar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.asset('assets/images/branding2.png',
-                fit: BoxFit.cover,),
+                  fit: BoxFit.cover,),
 
                Row(
                 children: [
