@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:shoe/HomeScreen/cubits/bottomnavcubit.dart';
 import 'package:shoe/core/utils/AppConstants.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shoe/features/authentication/business/AuthRepoImplementation/AuthRepositeryImplementation.dart';
@@ -70,6 +71,8 @@ class CreateObj{
 
 
     getIt.registerFactory<FetchBannersMainBloc>(()=>FetchBannersMainBloc(getBanner: getIt<GetBanner>()));
+
+    getIt.registerFactory<BottomNavCubit>(()=>BottomNavCubit());
 
 
 

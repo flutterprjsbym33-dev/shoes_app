@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shoe/HomeScreen/cubits/bottomnavcubit.dart';
 import 'package:shoe/core/di/GetIt.dart';
 import 'package:shoe/core/utils/Init.dart';
 import 'package:shoe/features/authentication/view/bloc/AuthMainBloc.dart';
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
       
       providers: [
         BlocProvider<AuthMainBloc>(create: (context)=>Initializer.getIt<AuthMainBloc>()),
-        BlocProvider<FetchBannersMainBloc>(create: (context)=>Initializer.getIt<FetchBannersMainBloc>())
+        BlocProvider<FetchBannersMainBloc>(create: (context)=>Initializer.getIt<FetchBannersMainBloc>()),
+        BlocProvider<BottomNavCubit>(create: (context)=>Initializer.getIt<BottomNavCubit>())
       ],
       child: ScreenUtilInit(
         designSize:   const Size(412, 846),

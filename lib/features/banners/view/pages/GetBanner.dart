@@ -1,3 +1,4 @@
+import 'package:another_carousel_pro/another_carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,7 +56,7 @@ class _GetBanners extends State<GetBanners> {
                       enabled: true, //Default value
                       direction: ShimmerDirection.fromLTRB(),  //Default Value
                       child: Container(
-                        color: Colors.white,
+                        color: Colors.grey,
                       ),
                     ),
                 ),
@@ -80,8 +81,8 @@ class _GetBanners extends State<GetBanners> {
                         return
                           ClipRRect(
                             borderRadius: BorderRadius.circular(15),
-                            child: CachedNetworkImage(
-                              imageUrl: state.banners[index].imageUrl,
+                            child: AnotherCarousel(images: state.banners.map((i)=>CachedNetworkImage(
+                              imageUrl: i.imageUrl,
                               fit: BoxFit.fill,
                               placeholder: (context, url) => Shimmer(
                                 duration: Duration(seconds: 3), //Default value
@@ -95,7 +96,10 @@ class _GetBanners extends State<GetBanners> {
                                 ),
                               ),
                               errorWidget: (context, url, error) => Icon(Icons.error),
-                            ),
+                            )).toList(),
+                              dotSize: 0,
+                              dotColor: Colors.transparent,
+                              dotBgColor: Colors.transparent,)
                           );
 
                         }

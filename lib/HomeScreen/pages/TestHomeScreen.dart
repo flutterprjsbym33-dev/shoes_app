@@ -6,6 +6,7 @@ import 'package:shoe/features/banners/view/pages/FetchedBanner.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/banners/view/pages/AppBarBannerList.dart';
+import 'BottomNav.dart';
 
 class Testhomescreen extends StatefulWidget {
   const Testhomescreen({super.key});
@@ -18,12 +19,21 @@ class _TesthomescreenState extends State<Testhomescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.map_outlined),
+          onPressed: (){},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomNavigation(),
+
       body: Padding(
         padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 8.h),
         child: CustomScrollView(
           slivers: [
            CustomAppbar(),
             FetchedBanner(),
+            
+            
 
 
           ],
