@@ -3,10 +3,10 @@ import 'package:shoe/features/banners/domain/failure.dart';
 import 'package:shoe/features/catogories/domain/cato_entity/categories_entity.dart';
 import 'package:shoe/features/catogories/domain/cato_repo/CategoriesRepositery.dart';
 
-class GetCategories{
+class GetCategoriesUseCae{
 
   CategoriesRepository categoriesRepository;
-  GetCategories({required this.categoriesRepository});
+  GetCategoriesUseCae({required this.categoriesRepository});
 
   Future<Either<Failure,List<CategoriesEntity>>> call(){
      return categoriesRepository.getCategories();
