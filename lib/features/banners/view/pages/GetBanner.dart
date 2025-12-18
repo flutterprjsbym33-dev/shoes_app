@@ -80,7 +80,7 @@ class _GetBanners extends State<GetBanners> {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context,index){
                         return ClipRRect(
-                          child: Image.network(state.banners[index].imageUrl,fit: BoxFit.cover,),
+                          child: Image.network(state.banners[index].imageUrl,),
                         );
                         }
                     ),

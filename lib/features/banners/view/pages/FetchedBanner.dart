@@ -8,10 +8,12 @@ class FetchedBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       expandedHeight: MediaQuery.of(context).size.height * 0.30,
+      toolbarHeight: 0,
+      collapsedHeight: 0,
 
       automaticallyImplyLeading: false,
       flexibleSpace: FlexibleSpaceBar(
-        background: GetBanners(),
+        title: GetBanners(),
       ),
 
     );
