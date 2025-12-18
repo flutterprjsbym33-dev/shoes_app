@@ -7,6 +7,7 @@ import 'package:shoe/features/banners/view/pages/FetchedBanner.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/banners/view/pages/AppBarBannerList.dart';
+import '../../features/catogories/view/pages/Catogories.dart';
 import 'BottomNav.dart';
 
 class Testhomescreen extends StatefulWidget {
@@ -26,6 +27,7 @@ class _TesthomescreenState extends State<Testhomescreen> {
           slivers: [
            CustomAppbar(),
             FetchedBanner(),
+            Catogories()
           ],
         ),
       )
