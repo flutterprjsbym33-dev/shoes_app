@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:shoe/core/utils/appColor.dart';
 import 'package:shoe/core/utils/snackbar.dart';
+import 'package:shoe/features/catogories/view/bloc/Catotitle_check_cubit.dart';
 import 'package:shoe/features/catogories/view/bloc/FetchCatogoriesCubit.dart';
 import 'package:shoe/features/catogories/view/bloc/GetCategoriesState.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -72,19 +73,21 @@ class _CatogoriesWidget extends State<CatogoriesWidget> {
                             padding: const EdgeInsets.only(right: 8.0),
                             child: GestureDetector(
                               onTap: (){
-
+                                context.read<IsCatSelected>().onSelected(index);
                               },
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width*0.2,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
                                   child: Container(
-                                    color: Colors.grey.shade200,
+                                    color: index == context.watch<IsCatSelected>().state ? AppColors.blue : Colors.grey.shade200,
                                     child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         CachedNetworkImage(
                                           imageUrl: state.catoList[index].cat_image,
-                                          fit: BoxFit.fill,
+                                          height: 50.h,
+                                          color:  index == context.watch<IsCatSelected>().state ? Colors.white : Colors.black,
                                           placeholder: (context, url) => Shimmer(
                                             duration: Duration(seconds: 3), //Default value
                                             interval: Duration(seconds: 5), //Default value: Duration(seconds: 0)
@@ -98,6 +101,9 @@ class _CatogoriesWidget extends State<CatogoriesWidget> {
                                           ),
                                           errorWidget: (context, url, error) => Icon(Icons.error),
                                         ),
+
+                                        index == context.watch<IsCatSelected>().state ?  Text(state.catoList[index].cat_title,
+                                        style: TextStyle(color:  index == context.watch<IsCatSelected>().state ? Colors.white : Colors.black,fontSize: 16.sp,fontWeight: FontWeight.w400 ),): SizedBox()
                                       ],
                                     ),
                                   )

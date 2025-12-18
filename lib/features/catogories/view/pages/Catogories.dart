@@ -9,7 +9,7 @@ class Catogories extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       automaticallyImplyLeading: false,
-      expandedHeight: MediaQuery.of(context).size.height*0.1,
+      expandedHeight: MediaQuery.of(context).size.height*0.09,
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(
           padding: const EdgeInsets.only(top: 8.0),
