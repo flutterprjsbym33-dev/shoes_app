@@ -21,9 +21,14 @@ import 'package:shoe/features/banners/data/datasource/BannersLocalDataSource.dar
 import 'package:shoe/features/banners/domain/bannerRepo/BannerRepo.dart';
 import 'package:shoe/features/banners/domain/usecases/getbanner.dart';
 import 'package:shoe/features/banners/view/bloc/FetchBannerMainBloc.dart';
+import 'package:shoe/features/catogories/data/cat_data_source/CatRepoLocalDataSource.dart';
+import 'package:shoe/features/catogories/data/cat_repo_imp/Cat_repo_impl.dart';
+import 'package:shoe/features/catogories/domain/UseCases/GetCateogories.dart';
+import 'package:shoe/features/catogories/domain/cato_repo/CategoriesRepositery.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/authentication/domain/useCases/AuthUseCase.dart';
+import '../../features/catogories/view/bloc/FetchCatogoriesCubit.dart';
 import '../../firebase_options.dart';
 
 
@@ -73,6 +78,18 @@ class CreateObj{
     getIt.registerFactory<FetchBannersMainBloc>(()=>FetchBannersMainBloc(getBanner: getIt<GetBanner>()));
 
     getIt.registerFactory<BottomNavCubit>(()=>BottomNavCubit());
+
+
+    getIt.registerLazySingleton<CatRepoLocalDataSource>(()=>CatRepoLocalDataSource(supabaseClient: getIt<SupabaseClient>()));
+
+    getIt.registerLazySingleton<CategoriesRepoImplemantation>(()=>CategoriesRepoImplemantation( catRepoLocalDataSource: getIt<CatRepoLocalDataSource>()));
+
+    getIt.registerLazySingleton<CategoriesRepository>(()=>getIt<CategoriesRepoImplemantation>());
+
+    getIt.registerLazySingleton<GetCategoriesUseCae>(()=>GetCategoriesUseCae( categoriesRepository: getIt<CategoriesRepository>()));
+
+    getIt.registerFactory<FetchCatogoriesCubit>(()=>FetchCatogoriesCubit(getCategoriesUseCae:  getIt<GetCategoriesUseCae>()));
+
 
 
 

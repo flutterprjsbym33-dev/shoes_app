@@ -8,6 +8,7 @@ import 'package:shoe/core/di/GetIt.dart';
 import 'package:shoe/core/utils/Init.dart';
 import 'package:shoe/features/authentication/view/bloc/AuthMainBloc.dart';
 import 'package:shoe/features/banners/view/bloc/FetchBannerMainBloc.dart';
+import 'package:shoe/features/catogories/view/bloc/FetchCatogoriesCubit.dart';
 import 'firebase_options.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shoe/features/authentication/view/pages/LoginScrren.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthMainBloc>(create: (context)=>Initializer.getIt<AuthMainBloc>()),
         BlocProvider<FetchBannersMainBloc>(create: (context)=>Initializer.getIt<FetchBannersMainBloc>()),
-        BlocProvider<BottomNavCubit>(create: (context)=>Initializer.getIt<BottomNavCubit>())
+        BlocProvider<BottomNavCubit>(create: (context)=>Initializer.getIt<BottomNavCubit>()),
+        BlocProvider<FetchCatogoriesCubit>(create: (context)=>Initializer.getIt<FetchCatogoriesCubit>())
       ],
       child: ScreenUtilInit(
         designSize:   const Size(412, 846),
