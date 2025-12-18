@@ -82,7 +82,7 @@ class _GetBanners extends State<GetBanners> {
                             borderRadius: BorderRadius.circular(15),
                             child: CachedNetworkImage(
                               imageUrl: state.banners[index].imageUrl,
-                              fit: BoxFit.fitWidth,
+                              fit: BoxFit.fill,
                               placeholder: (context, url) => Shimmer(
                                 duration: Duration(seconds: 3), //Default value
                                 interval: Duration(seconds: 5), //Default value: Duration(seconds: 0)

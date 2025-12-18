@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoe/HomeScreen/widgets/AppBar.dart';
 import 'package:shoe/features/banners/view/pages/AppBarBanner.dart';
 import 'package:shoe/features/banners/view/pages/FetchedBanner.dart';
@@ -18,7 +19,7 @@ class _TesthomescreenState extends State<Testhomescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 8),
+        padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 8.h),
         child: CustomScrollView(
           slivers: [
            CustomAppbar(),
