@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoe/HomeScreen/widgets/AppBar.dart';
+import 'package:shoe/core/utils/catmodel.dart';
 import 'package:shoe/features/banners/view/pages/AppBarBanner.dart';
 import 'package:shoe/features/banners/view/pages/FetchedBanner.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -19,23 +20,12 @@ class _TesthomescreenState extends State<Testhomescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.map_outlined),
-          onPressed: (){},
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomNavigation(),
-
       body: Padding(
         padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 8.h),
         child: CustomScrollView(
           slivers: [
            CustomAppbar(),
             FetchedBanner(),
-            
-            
-
-
           ],
         ),
       )
