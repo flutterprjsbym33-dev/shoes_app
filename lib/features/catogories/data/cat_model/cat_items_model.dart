@@ -6,7 +6,7 @@ class CategoryModel extends CategoriesEntity {
   factory CategoryModel.fromJson(Map<String,dynamic> map)
   {
     return CategoryModel(
-        id: map['id'] ?? '',
+        id: map['id'].toString() ?? '',
         cat_image: map['cat_img'] ?? '',
         cat_title: map['cat_title'] ?? '');
   }

@@ -28,7 +28,7 @@ class _CatogoriesWidget extends State<CatogoriesWidget> {
   void initState() {
 
     super.initState();
-    context.read<FetchCatogoriesCubit>().getCategoriesUseCae;
+    context.read<FetchCatogoriesCubit>().getAllCato();
   }
 
   @override
@@ -68,26 +68,43 @@ class _CatogoriesWidget extends State<CatogoriesWidget> {
                         itemCount: state.catoList.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context,index){
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: AnotherCarousel(
-                                images: state.catoList.map((i)=> CachedNetworkImage(
-                                  imageUrl: i.cat_image,
-                                  fit: BoxFit.fill,
-                                  placeholder: (context, url) => Shimmer(
-                                    duration: Duration(seconds: 3), //Default value
-                                    interval: Duration(seconds: 5), //Default value: Duration(seconds: 0)
-                                    color: Colors.white, //Default value
-                                    colorOpacity: 0, //Default value
-                                    enabled: true, //Default value
-                                    direction: ShimmerDirection.fromLTRB(),  //Default Value
-                                    child: Container(
-                                      color: Colors.grey,
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: GestureDetector(
+                              onTap: (){
+
+                              },
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width*0.2,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Container(
+                                    color: Colors.grey.shade200,
+                                    child: Column(
+                                      children: [
+                                        CachedNetworkImage(
+                                          imageUrl: state.catoList[index].cat_image,
+                                          fit: BoxFit.fill,
+                                          placeholder: (context, url) => Shimmer(
+                                            duration: Duration(seconds: 3), //Default value
+                                            interval: Duration(seconds: 5), //Default value: Duration(seconds: 0)
+                                            color: Colors.white, //Default value
+                                            colorOpacity: 0, //Default value
+                                            enabled: true, //Default value
+                                            direction: ShimmerDirection.fromLTRB(),  //Default Value
+                                            child: Container(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          errorWidget: (context, url, error) => Icon(Icons.error),
+                                        ),
+                                      ],
                                     ),
+                                  )
                                   ),
-                                  errorWidget: (context, url, error) => Icon(Icons.error),
-                                )).toList()),
-                            );
+                              ),
+                            ),
+                          );
 
                           },
                       );

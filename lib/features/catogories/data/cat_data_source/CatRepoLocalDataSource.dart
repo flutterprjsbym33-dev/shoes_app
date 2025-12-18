@@ -14,6 +14,7 @@ class CatRepoLocalDataSource{
  {
    try{
      final rawCato =  await supabaseClient.from('shoe_cat').select();
+     debugPrint("CatError ->>>>>>> $rawCato");
      final catoList = rawCato.map((e)=>CategoryModel.fromJson(e)).toList();
      return catoList;
 
