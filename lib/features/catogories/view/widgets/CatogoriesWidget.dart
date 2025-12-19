@@ -17,147 +17,163 @@ class CatogoriesWidget extends StatefulWidget {
   }
 }
 
-
 class _CatogoriesWidget extends State<CatogoriesWidget> {
+  _CatogoriesWidget();
 
-
-
-   _CatogoriesWidget();
-
-
-   @override
+  @override
   void initState() {
-
     super.initState();
     context.read<FetchCatogoriesCubit>().getAllCato();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("Categories",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700,fontSize: 22.sp),),
-        SizedBox(height: 5.h,),
-        Expanded(
-          child: BlocConsumer<FetchCatogoriesCubit,FetchCategoriesMainState>(
-              builder: (context,state)
-              {
-                if(state is FetchCategoriesLoadingState)
-                  {
-                    return ListView.builder(
-                      itemCount: 6,
-                      itemBuilder: (context,index) {
-                        return Shimmer(
-                          duration: Duration(seconds: 3), //Default value
-                          interval: Duration(seconds: 5), //Default value: Duration(seconds: 0)
-                          color: Colors.white, //Default value
-                          colorOpacity: 0, //Default value
-                          enabled: true, //Default value
-                          direction: ShimmerDirection.fromLTRB(),  //Default Value
-                          child: Container(
-                            color: Colors.grey,
-                          ),
-                        );
-                      }
-                    );
-
-
-                  }if(state is FetchCategoriesSuccessState)
-                    {
-                      return ListView.builder(
-                        itemCount: state.catoList.length,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return  BlocConsumer<FetchCatogoriesCubit,
+                      FetchCategoriesMainState>(
+                    builder: (context, state) {
+                      if (state is FetchCategoriesLoadingState) {
+                        return ListView.separated(
+                            separatorBuilder: (_, __) => const SizedBox(width: 10),
                           scrollDirection: Axis.horizontal,
-                          itemBuilder: (context,index){
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: GestureDetector(
-                              onTap: (){
-                                context.read<IsCatSelected>().onSelected(index);
-                              },
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width*0.2,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
+                            itemCount: 6,
+                            itemBuilder: (context, index) {
+                              return SizedBox(
+                                height: constraints.maxHeight,
+                                width: constraints.maxWidth * 0.2,
+                                child: Shimmer(
+                                  duration: Duration(seconds: 3),
+                                  interval: Duration(seconds: 5),
+                                  color: Colors.white,
+                                  colorOpacity: 0,
+                                  enabled: true,
+                                  direction: ShimmerDirection.fromLTRB(),
                                   child: Container(
-                                    color: index == context.watch<IsCatSelected>().state ? AppColors.blue : Colors.grey.shade200,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        CachedNetworkImage(
-                                          imageUrl: state.catoList[index].cat_image,
-                                          height: 50.h,
-                                          color:  index == context.watch<IsCatSelected>().state ? Colors.white : Colors.black,
-                                          placeholder: (context, url) => Shimmer(
-                                            duration: Duration(seconds: 3), //Default value
-                                            interval: Duration(seconds: 5), //Default value: Duration(seconds: 0)
-                                            color: Colors.white, //Default value
-                                            colorOpacity: 0, //Default value
-                                            enabled: true, //Default value
-                                            direction: ShimmerDirection.fromLTRB(),  //Default Value
-                                            child: Container(
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                          errorWidget: (context, url, error) => Icon(Icons.error),
-                                        ),
-
-                                        index == context.watch<IsCatSelected>().state ?  Text(state.catoList[index].cat_title,
-                                        style: TextStyle(color:  index == context.watch<IsCatSelected>().state ? Colors.white : Colors.black,fontSize: 16.sp,fontWeight: FontWeight.w400 ),): SizedBox()
-                                      ],
-                                    ),
-                                  )
+                                    color: Colors.grey,
                                   ),
-                              ),
-                            ),
-                          );
+                                ),
+                              );
+                            });
+                      }
 
-                          },
-                      );
-
-
-
-                    }else {
-                return  ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                      itemCount: 6,
-                      itemBuilder: (context,index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: SizedBox(
-                            width: 120.w,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Shimmer(
-                                duration: Duration(seconds: 3), //Default value
-                                interval: Duration(seconds: 5), //Default value: Duration(seconds: 0)
-                                color: Colors.white, //Default value
-                                colorOpacity: 0, //Default value
-                                enabled: true, //Default value
-                                direction: ShimmerDirection.fromLTRB(),  //Default Value
+                      if (state is FetchCategoriesSuccessState) {
+                        return ListView.builder(
+                          itemCount: state.catoList.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            bool isSelected = index == context.watch<IsCatSelected>().state;
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  context.read<IsCatSelected>().onSelected(index);
+                                },
                                 child: Container(
-                                  color: Colors.grey,
+                                  height: constraints.maxHeight,
+                                  width: constraints.maxWidth * 0.2,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: Container(
+                                        color: index ==
+                                            context
+                                                .watch<IsCatSelected>()
+                                                .state
+                                            ? AppColors.blue
+                                            : Colors.grey.shade200,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            CachedNetworkImage(
+                                              imageUrl:
+                                              state.catoList[index].cat_image,
+                                              height:isSelected ? constraints.maxHeight * 0.7 : constraints.maxHeight * 0.85 ,
+                                              color:isSelected
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              placeholder: (context, url) => Shimmer(
+                                                duration: Duration(seconds: 3),
+                                                interval: Duration(seconds: 5),
+                                                color: Colors.white,
+                                                colorOpacity: 0,
+                                                enabled: true,
+                                                direction:
+                                                ShimmerDirection.fromLTRB(),
+                                                child: Container(
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                  Icon(Icons.error),
+                                            ),
+                                           isSelected
+                                                ? Container(
+
+                                              width: constraints.maxWidth,
+                                              height:
+                                              constraints.maxHeight * 0.25,
+                                              child: FittedBox(
+                                                child: Text(
+                                                  state.catoList[index]
+                                                      .cat_title,
+                                                  style: TextStyle(
+                                                      color: isSelected
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                      FontWeight.w600),
+                                                ),
+                                              ),
+                                            )
+                                                : SizedBox()
+                                          ],
+                                        ),
+                                      )),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         );
+                      } else {
+                        return ListView.separated(
+                            separatorBuilder: (_, __) => const SizedBox(width: 10),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 6,
+                            itemBuilder: (context, index) {
+                              return SizedBox(
+                                height: constraints.maxHeight,
+                                width: constraints.maxWidth * 0.2,
+                                child: Shimmer(
+                                  duration: Duration(seconds: 3),
+                                  interval: Duration(seconds: 5),
+                                  color: Colors.white,
+                                  colorOpacity: 0,
+                                  enabled: true,
+                                  direction: ShimmerDirection.fromLTRB(),
+                                  child: Container(
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            });
                       }
+                    },
+                    listener: (context, state) {
+                      if (state is FetchCategoriesErrorState) {
+                        ShowSnacBar(
+                            context: context,
+                            discrip: state.errMsg,
+                            type: SnackBarType.Error);
+                      }
+                    },
                   );
-
-                      }
                 },
-              listener: (context,state)
-              {
-                if(state is FetchCategoriesErrorState)
-                {
-                  ShowSnacBar(context: context, discrip: state.errMsg, type: SnackBarType.Error);
-                }
-
-              },
-          ),
-        ),
-      ],
+              
+            
+          
+      
     );
   }
 }

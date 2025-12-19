@@ -20,6 +20,7 @@ class Testhomescreen extends StatefulWidget {
 class _TesthomescreenState extends State<Testhomescreen> {
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Padding(
         padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 8.h),
@@ -27,7 +28,8 @@ class _TesthomescreenState extends State<Testhomescreen> {
           slivers: [
            CustomAppbar(),
             FetchedBanner(),
-            Catogories()
+            Catogories(),
+
           ],
         ),
       )

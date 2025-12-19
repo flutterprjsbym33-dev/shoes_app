@@ -10,7 +10,7 @@ class CustomAppbar extends StatelessWidget {
 
   automaticallyImplyLeading: false,
       pinned: true,
-      toolbarHeight: 28.h,
+      toolbarHeight: 60.h,
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.h,vertical: 12),

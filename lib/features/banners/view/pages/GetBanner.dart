@@ -43,6 +43,7 @@ class _GetBanners extends State<GetBanners> {
           if(state is FetchBannerLoadingState)
             {
               return SizedBox(
+                height: double.infinity,
                 width: double.infinity,
                 child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10.h,vertical: 10.h) ,
@@ -56,7 +57,7 @@ class _GetBanners extends State<GetBanners> {
                       enabled: true, //Default value
                       direction: ShimmerDirection.fromLTRB(),  //Default Value
                       child: Container(
-                        color: Colors.grey,
+                        color: Colors.grey.shade200,
                       ),
                     ),
                 ),
