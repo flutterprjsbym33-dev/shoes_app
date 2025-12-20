@@ -9,7 +9,6 @@ class Catogories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-
       pinned: false,
       floating: false,
       automaticallyImplyLeading: false,

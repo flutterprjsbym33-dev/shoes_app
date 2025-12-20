@@ -4,6 +4,7 @@ import 'package:shoe/HomeScreen/widgets/AppBar.dart';
 import 'package:shoe/core/utils/catmodel.dart';
 import 'package:shoe/features/banners/view/pages/AppBarBanner.dart';
 import 'package:shoe/features/banners/view/pages/FetchedBanner.dart';
+import 'package:shoe/features/catogories/view/widgets/CatogoriesText.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/banners/view/pages/AppBarBannerList.dart';
@@ -28,7 +29,9 @@ class _TesthomescreenState extends State<Testhomescreen> {
           slivers: [
            CustomAppbar(),
             FetchedBanner(),
+            CategoryText(),
             Catogories(),
+
 
           ],
         ),
