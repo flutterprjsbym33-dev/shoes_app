@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoe/HomeScreen/widgets/AppBar.dart';
 import 'package:shoe/core/utils/catmodel.dart';
+import 'package:shoe/core/utils/shoe_model.dart';
 import 'package:shoe/features/banners/view/pages/AppBarBanner.dart';
 import 'package:shoe/features/banners/view/pages/FetchedBanner.dart';
 import 'package:shoe/features/catogories/view/widgets/CatogoriesText.dart';
@@ -31,6 +32,13 @@ class _TesthomescreenState extends State<Testhomescreen> {
             FetchedBanner(),
             CategoryText(),
             Catogories(),
+            SliverToBoxAdapter(
+              child: OutlinedButton(onPressed: ()async{
+                await uploadAllShoes(shoes);
+
+              } ,child: Text(""
+                  "upload")),
+            )
 
 
           ],
