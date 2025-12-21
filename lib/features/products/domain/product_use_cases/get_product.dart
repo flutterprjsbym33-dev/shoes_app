@@ -10,7 +10,7 @@ class GetShoes {
 
   GetShoes(this.repository);
 
-  Either<Failure, List<Shoe>> call({
+  Future<Either<Failure, List<Shoe>>> call({
     String? brand,
     required int page,
     required int limit,

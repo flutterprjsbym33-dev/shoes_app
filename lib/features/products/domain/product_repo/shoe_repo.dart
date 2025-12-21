@@ -4,7 +4,7 @@ import 'package:shoe/features/banners/domain/failure.dart';
 import '../product_entity/shoe.dart';
 
 abstract class ShoeRepository {
-  Either<Failure,List<Shoe>> getShoes({
+ Future< Either<Failure,List<Shoe>>> getShoes({
     String? brand,
     required int page,
     required int limit,
