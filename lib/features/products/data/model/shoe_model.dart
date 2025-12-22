@@ -15,15 +15,15 @@ class ShoeModel extends Shoe {
 
   factory ShoeModel.fromJson(Map<String, dynamic> json) {
     return ShoeModel(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      brand: json['brand'],
-      sizes: List<int>.from(json['sizes']),
+      id: json['id'] ?? '',
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      brand: json['brand'] ?? '',
+      sizes: List<int>.from(json['sizes'] ?? []) ,
       rating: (json['rating'] as num).toDouble(),
       oldPrice: (json['old_price'] as num).toDouble(),
       newPrice: (json['new_price'] as num).toDouble(),
-      images: List<String>.from(json['images']),
+      images: List<String>.from(json['images'] ?? []),
     );
   }
 }

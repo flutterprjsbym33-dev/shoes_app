@@ -14,18 +14,16 @@ class BannerRemoteDataSource{
   {
     try{
       final bannerJson =  await supabaseClient.from('banners').select() as List;
-      print('BannerJson ->>>>>>>>$bannerJson');
+
       final imageUrls =  bannerJson.map((e)=>BannerModel.fromJson(e)).toList();
       print('ImageUrls $imageUrls');
       return imageUrls;
       
     }on SocketException {
-      debugPrint("Image Fetched Errorrrrrrrrrrr.");
       throw NoInternetException();
       
     } catch (e)
     {
-      debugPrint("Image Fetched Errorrrrrrrrrrr.");
       throw ServerErrorException();
     }
   }

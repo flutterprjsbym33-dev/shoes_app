@@ -10,6 +10,8 @@ import 'package:shoe/features/catogories/view/bloc/FetchCatogoriesCubit.dart';
 import 'package:shoe/features/catogories/view/bloc/GetCategoriesState.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../../products/view/shoe_cubit/shoe_cubit.dart';
+
 class CatogoriesWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -24,6 +26,7 @@ class _CatogoriesWidget extends State<CatogoriesWidget> {
   void initState() {
     super.initState();
     context.read<FetchCatogoriesCubit>().getAllCato();
+    context.read<FetchShoeCubit>().getShoesForHome();
   }
 
   @override

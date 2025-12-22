@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../features/products/data/model/shoe_model.dart';
 
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({super.key});
@@ -25,7 +28,14 @@ class CustomAppbar extends StatelessWidget {
 
                Row(
                 children: [
-                  IconButton(onPressed: (){}, icon: Icon(Icons.notifications,size: 30.h,)),
+                  IconButton(onPressed: ()async{
+                    final data = await Supabase.instance.client.from('shoes').select() as List;
+                    debugPrint(data.toString());
+                    final shoes = data.map((e)=>ShoeModel.fromJson(e)).toList();
+                    debugPrint(shoes.length.toString());
+
+
+                  }, icon: Icon(Icons.notifications,size: 30.h,)),
                   IconButton(onPressed: (){}, icon: Icon(Icons.share,size: 26.h,)),
 
                 ],

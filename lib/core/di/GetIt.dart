@@ -25,6 +25,11 @@ import 'package:shoe/features/catogories/data/cat_data_source/CatRepoLocalDataSo
 import 'package:shoe/features/catogories/data/cat_repo_imp/Cat_repo_impl.dart';
 import 'package:shoe/features/catogories/domain/UseCases/GetCateogories.dart';
 import 'package:shoe/features/catogories/domain/cato_repo/CategoriesRepositery.dart';
+import 'package:shoe/features/products/data/_data_source/get_shoe_remote_ds.dart';
+import 'package:shoe/features/products/data/repo_imp/shoe_repo_impl.dart';
+import 'package:shoe/features/products/domain/product_repo/shoe_repo.dart';
+import 'package:shoe/features/products/domain/product_use_cases/get_product.dart';
+import 'package:shoe/features/products/view/shoe_cubit/shoe_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/authentication/domain/useCases/AuthUseCase.dart';
@@ -89,6 +94,16 @@ class CreateObj{
     getIt.registerLazySingleton<GetCategoriesUseCae>(()=>GetCategoriesUseCae( categoriesRepository: getIt<CategoriesRepository>()));
 
     getIt.registerFactory<FetchCatogoriesCubit>(()=>FetchCatogoriesCubit(getCategoriesUseCae:  getIt<GetCategoriesUseCae>()));
+
+    getIt.registerLazySingleton<FetchSoesRemoteDataSource>(()=>FetchSoesRemoteDataSource(supabaseClient: getIt<SupabaseClient>()));
+
+    getIt.registerLazySingleton<ShoeRepoImplementation>(()=>ShoeRepoImplementation(getShoeRemoteDataSource: getIt<FetchSoesRemoteDataSource>()));
+
+    getIt.registerLazySingleton<ShoeRepository>(()=>getIt<ShoeRepoImplementation>());
+
+    getIt.registerLazySingleton<GetShoes>(()=>GetShoes(getIt<ShoeRepository>()));
+
+    getIt.registerFactory<FetchShoeCubit>(()=>FetchShoeCubit(getShoes: getIt<GetShoes>()));
 
 
 

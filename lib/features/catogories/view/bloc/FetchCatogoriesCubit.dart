@@ -13,7 +13,7 @@ class FetchCatogoriesCubit extends Cubit<FetchCategoriesMainState>
    {
      emit(FetchCategoriesLoadingState());
      final result =  await getCategoriesUseCae.call();
-     debugPrint("cat Result ->>>>>>> $result");
+
      result.fold(ifLeft: (failure)=>emit(FetchCategoriesErrorState(errMsg: failure.message)),
          ifRight: (success)=>emit(FetchCategoriesSuccessState(catoList: success)));
 

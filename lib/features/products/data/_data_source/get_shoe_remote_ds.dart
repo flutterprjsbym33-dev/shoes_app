@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:shoe/core/utils/CustomExpn.dart';
 import 'package:shoe/features/products/data/model/shoe_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -22,14 +23,19 @@ class FetchSoesRemoteDataSource extends GetShoeRemoteDataSource{
     try{
       final from = (page-1)*limit;
       final to = from+limit-1;
-      var querry = supabaseClient.from('shoe').select().eq('is_active', true);
+      var querry =   supabaseClient.from('shoes').select();
+      debugPrint("data ====>$querry");
 
-      if(brand!=null)
+      if(brand!=null && brand.isNotEmpty)
       {
         querry = querry.eq('brand', brand);
       }
 
-      final data = await querry.order('created_at',ascending: false).range(from, to) as List;
+      final data = await querry.range(from, to) as List;
+      debugPrint("Raw data length: ${data.length}");
+      debugPrint(data.toString());
+
+
 
       return data.map((e)=>ShoeModel.fromJson(e)).toList();
     } on SocketException {

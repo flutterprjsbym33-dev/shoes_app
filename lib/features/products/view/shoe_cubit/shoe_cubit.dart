@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoe/features/products/domain/product_use_cases/get_product.dart';
 import 'package:shoe/features/products/view/shoe_cubit/shoe_state.dart';
@@ -25,6 +26,9 @@ class FetchShoeCubit extends Cubit<ShoeState> {
       limit: limit,
     );
 
+    debugPrint('>$newShoes');
+
+
     newShoes.fold(ifLeft: (failure)=>emit(
         ShoeState(shoes: [],
         isReachedMax: false,
@@ -47,6 +51,11 @@ class FetchShoeCubit extends Cubit<ShoeState> {
 
 
     emit(ShoeState.initial());
+    emit(ShoeState(shoes: state.shoes,
+        isReachedMax: state.isReachedMax,
+        page: state.page,
+        isLoading: true));
+
 
     final newShoes = await getShoes(
       brand: brand,
