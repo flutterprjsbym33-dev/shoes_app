@@ -18,7 +18,8 @@ class FetchShoeCubit extends Cubit<ShoeState> {
     emit(ShoeState(shoes: state.shoes,
         isReachedMax: state.isReachedMax,
         page: state.page,
-        isLoading: true));
+        isLoading: true,
+    isLoadingForPaging: state.page>1 ? true : false));
 
     final newShoes = await getShoes(
       brand: '',
@@ -34,13 +35,15 @@ class FetchShoeCubit extends Cubit<ShoeState> {
         isReachedMax: false,
         page:state.page,
         isLoading: false,
+        isLoadingForPaging: false,
         errMsg: failure.message)),
         ifRight: (success)=>emit(
           ShoeState(
               shoes: [...state.shoes,...success],
               isReachedMax: success.length<limit,
               page: state.page+1,
-              isLoading: false)
+              isLoading: false,
+          isLoadingForPaging: false)
         ));
 
   }
@@ -54,7 +57,8 @@ class FetchShoeCubit extends Cubit<ShoeState> {
     emit(ShoeState(shoes: state.shoes,
         isReachedMax: state.isReachedMax,
         page: state.page,
-        isLoading: true));
+        isLoading: true,
+    isLoadingForPaging: state.page>1 ? true : false));
 
 
     final newShoes = await getShoes(
@@ -68,13 +72,15 @@ class FetchShoeCubit extends Cubit<ShoeState> {
             isReachedMax: false,
             page:state.page,
             isLoading: false,
+            isLoadingForPaging: false,
             errMsg: failure.message)),
         ifRight: (success)=>emit(
             ShoeState(
                 shoes: success,
                 isReachedMax: success.length<limit,
                 page: state.page+1,
-                isLoading: false)
+                isLoading: false,
+                isLoadingForPaging: false)
         ));
 
   }

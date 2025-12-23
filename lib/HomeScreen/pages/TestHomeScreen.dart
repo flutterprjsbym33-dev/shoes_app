@@ -8,6 +8,7 @@ import 'package:shoe/core/utils/shoe_model.dart';
 import 'package:shoe/features/banners/view/pages/AppBarBanner.dart';
 import 'package:shoe/features/banners/view/pages/FetchedBanner.dart';
 import 'package:shoe/features/catogories/view/widgets/CatogoriesText.dart';
+import 'package:shoe/features/products/view/pages/produec_page.dart';
 import 'package:shoe/features/products/view/shoe_cubit/shoe_cubit.dart';
 import 'package:shoe/features/products/view/shoe_cubit/shoe_state.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -56,83 +57,8 @@ class _TesthomescreenState extends State<Testhomescreen> {
             FetchedBanner(),
             CategoryText(),
             Catogories(),
-            BlocConsumer<FetchShoeCubit,ShoeState>(builder: (context,state){
-              if(state.shoes.isEmpty)
-              {
-                return  SliverList(delegate: SliverChildBuilderDelegate(
-                        (context,index){
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4,vertical: 4),
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height*0.3,
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Shimmer(
-                                duration: Duration(seconds: 3),
-                                interval: Duration(seconds: 5),
-                                color: Colors.white,
-                                colorOpacity: 0,
-                                enabled: true,
-                                direction: ShimmerDirection.fromLTRB(),
-                                child: Container(
-                                  color: Colors.grey.shade400,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
+            ProductPage()
 
-                    },
-                    childCount: 4
-                ));
-
-              }
-              if(state.shoes.isNotEmpty)
-              {
-                return  SliverList(delegate: SliverChildBuilderDelegate(
-                        (context,index){
-                          debugPrint("Shoes length ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.${state.shoes.length.toString()}");
-                          final shoe = state.shoes[index];
-                          final imageUrl = (shoe.images != null && shoe.images.isNotEmpty)
-                              ? shoe.images[0]
-                              : 'https://via.placeholder.com/150'; // placeholder image
-
-                      return SizedBox(
-                        height: MediaQuery.of(context).size.height*0.4,
-                        width: double.infinity,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4,vertical: 4),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: CachedNetworkImage(
-                              imageUrl: imageUrl,
-                                fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      );
-
-                    },
-                    childCount: state.shoes.length,
-                ));
-
-
-              }
-              if(state.isReachedMax)
-              {
-                return SliverToBoxAdapter();
-              }
-              else{
-                return SliverToBoxAdapter(child: CircularProgressIndicator(),);
-              }
-            },
-                listener: (context,state){
-
-                })
 
 
 

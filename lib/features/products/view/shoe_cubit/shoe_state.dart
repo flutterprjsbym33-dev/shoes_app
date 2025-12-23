@@ -6,13 +6,15 @@ class ShoeState{
   bool isReachedMax;
   int page;
   String? errMsg;
+  bool isLoadingForPaging;
 
   ShoeState({
     required this.shoes,
     required this.isReachedMax,
     required this.page,
     required this.isLoading,
-     this.errMsg
+     this.errMsg,
+    required this.isLoadingForPaging
   });
 
   factory ShoeState.initial()
@@ -21,7 +23,8 @@ class ShoeState{
         shoes: [],
         isReachedMax: false,
         page: 1,
-        isLoading: false);
+        isLoading: false,
+    isLoadingForPaging: false);
   }
 
 }
