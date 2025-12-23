@@ -9,6 +9,8 @@ class ImageOverlay extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end:  Alignment.bottomLeft,
 
             colors: [
               Colors.black.withOpacity(0.65),
