@@ -11,6 +11,7 @@ import 'package:shoe/features/catogories/view/widgets/CatogoriesText.dart';
 import 'package:shoe/features/products/view/pages/produec_page.dart';
 import 'package:shoe/features/products/view/shoe_cubit/shoe_cubit.dart';
 import 'package:shoe/features/products/view/shoe_cubit/shoe_state.dart';
+import 'package:shoe/features/products/view/widgets/product_text.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/banners/view/pages/AppBarBannerList.dart';
@@ -27,22 +28,16 @@ class Testhomescreen extends StatefulWidget {
 
 class _TesthomescreenState extends State<Testhomescreen> {
 
-  ScrollController _scrollController = ScrollController();
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    _scrollController.addListener(onScrollListen);
+
   }
 
-  void onScrollListen(){
-    if(_scrollController.position.pixels>=_scrollController.position.maxScrollExtent-200)
-      {
-        context.read<FetchShoeCubit>().getShoesForHome();
-      }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +46,12 @@ class _TesthomescreenState extends State<Testhomescreen> {
       body: Padding(
         padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 8.h),
         child: CustomScrollView(
-          controller: _scrollController,
           slivers: [
            CustomAppbar(),
             FetchedBanner(),
             CategoryText(),
             Catogories(),
+            ProductText(),
             ProductPage()
 
 

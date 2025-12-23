@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:shoe/features/products/domain/product_entity/shoe.dart';
+import 'package:shoe/features/products/view/widgets/products_list.dart';
 import 'package:shoe/features/products/view/widgets/shimmer.dart';
 import '../shoe_cubit/shoe_cubit.dart';
 import '../shoe_cubit/shoe_state.dart';
 
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+
 
   @override
   State<ProductPage> createState() => _ProduecPageState();
@@ -45,34 +47,7 @@ class _ProduecPageState extends State<ProductPage> {
       }
       if(state.shoes.isNotEmpty)
       {
-        return  SliverList(delegate: SliverChildBuilderDelegate(
-              (context,index){
-
-            final shoe = state.shoes[index];
-            final imageUrl = (shoe.images != null && shoe.images.isNotEmpty)
-                ? shoe.images[0]
-                : 'https://via.placeholder.com/150'; // placeholder image
-
-            return SizedBox(
-              height: MediaQuery.of(context).size.height*0.4,
-              width: double.infinity,
-              child: Padding(
-                padding:  EdgeInsets.only(top: 10,left: 4,bottom: 8),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: CachedNetworkImage(
-                    placeholder: (_,_)=>Shimmers(),
-                    imageUrl: imageUrl,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            );
-
-          },
-          childCount: state.shoes.length,
-        ));
-
+        return  ProductsList(shoes: state.shoes,length: 4,);
 
       }
       if(state.isLoadingForPaging)
