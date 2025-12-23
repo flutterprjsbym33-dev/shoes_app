@@ -12,7 +12,7 @@ class FetchShoeCubit extends Cubit<ShoeState> {
 
   Future<void> getShoesForHome()async
   {
-    if(state.isLoading && state.isReachedMax) return;
+    if(state.isLoading || state.isReachedMax) return;
 
 
     emit(ShoeState(shoes: state.shoes,
@@ -47,7 +47,7 @@ class FetchShoeCubit extends Cubit<ShoeState> {
 
   Future<void> getShoesFormBrand(String brand)async
   {
-    if(state.isLoading && state.isReachedMax) return;
+    if(state.isLoading || state.isReachedMax) return;
 
 
     emit(ShoeState.initial());
