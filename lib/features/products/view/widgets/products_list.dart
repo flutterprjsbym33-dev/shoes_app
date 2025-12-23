@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoe/features/products/domain/product_entity/shoe.dart';
+import 'package:shoe/features/products/view/widgets/overlay.dart';
 import 'package:shoe/features/products/view/widgets/shimmer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -28,16 +29,94 @@ class ProductsList extends StatelessWidget {
           width: double.infinity,
           child: Padding(
             padding:  EdgeInsets.only(top: 5,left: 4,bottom: 8),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: CachedNetworkImage(
-                placeholder: (_,_)=>Shimmers(),
-                imageUrl: imageUrl,
-                fit: BoxFit.cover,
+              child: Card(
+                elevation: 4,
+                shape: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide.none
+                ),
+                child:  Stack(
+                                children: [
+                                     Positioned.fill(
+                                       child: ClipRRect(
+                                         borderRadius: BorderRadius.circular(15),
+                                         child: CachedNetworkImage(
+                                            placeholder: (_,_)=>Shimmers(),
+                                            imageUrl: imageUrl,
+                                            fit: BoxFit.cover,
+                                          ),
+                                       ),
+                                     ),
+                                  ImageOverlay(),
+                                  Positioned(
+                                    top: 0,
+                                      left: 8,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                        Text(
+                                        shoe.title,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.w800,
+                                          shadows: [
+                                            Shadow(
+                                              blurRadius: 8,
+                                              color: Colors.black.withOpacity(0.6),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                          Text(shoe.brand.toUpperCase(),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600
+                                            ),),
+                
+                                        ],
+                                      )),
+                
+                                  Positioned(
+                                      bottom: 5,
+                                      left: 8,
+                                      child: Row(
+                                        children: [
+                                              Text("${shoe.oldPrice}\$",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w800
+                                                ),),
+                                              SizedBox(width: 10,),
+                                              Text("${shoe.newPrice}\$",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 32,
+                                                    fontWeight: FontWeight.w800
+                                                ),),
+                                        ],
+                                      )),
+                                  Positioned(
+                                    bottom: 0,
+                                      right: 10,
+                                      child: Row(
+                                        children: [
+                
+                                        ],
+                                      )
+                                  )
+                
+                
+                                ],
+                              ),
+                            ),
               ),
-            ),
-          ),
-        );
+                        
+                      
+          );
+
 
       },
       childCount: length,
