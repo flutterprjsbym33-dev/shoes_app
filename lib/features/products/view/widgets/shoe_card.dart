@@ -21,7 +21,7 @@ class ShoeCard extends StatelessWidget {
       child: Padding(
         padding:  EdgeInsets.only(top: 5,left: 4,bottom: 8),
         child: Card(
-          elevation: 4,
+          elevation: 6,
           shape: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide.none

@@ -80,7 +80,9 @@ class _SeeAllProductsState extends State<SeeAllProducts> {
       }
       if(state.isReachedMax)
       {
-      return SliverToBoxAdapter();
+      return SliverToBoxAdapter(
+        child: Center(child: CircularProgressIndicator(),),
+      );
       }
       else{
       return SliverToBoxAdapter(child: CircularProgressIndicator(),);

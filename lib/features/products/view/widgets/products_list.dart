@@ -1,40 +1,40 @@
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter/material.dart';
-import 'package:shoe/features/products/domain/product_entity/shoe.dart';
-import 'package:shoe/features/products/view/widgets/overlay.dart';
-import 'package:shoe/features/products/view/widgets/shimmer.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shoe/features/products/view/widgets/shoe_card.dart';
-
-
+import '';
+import '../../domain/product_entity/shoe.dart';
 
 class ProductsList extends StatelessWidget {
+  final List<Shoe> shoes;
+  final int length;
 
-  List<Shoe> shoes;
-  int length;
-   ProductsList({super.key,
-  required this.shoes ,required this.length
-   });
+  const ProductsList({
+    super.key,
+    required this.shoes,
+    required this.length,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(delegate: SliverChildBuilderDelegate(
-          (context,index){
-        final shoe = shoes[index];
-        return TweenAnimationBuilder(
-            tween: Tween(begin: 0,end: 1),
-            duration: Duration(milliseconds: 400+(index*30)),
-            builder: (context,value,child)=>
-                Transform.translate(
-                  offset: Offset(0, 30.0 * (1 - value)),
-                  child: Opacity(opacity: value.toDouble(),
-                  child: child,),
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+            (context, index) {
+          return AnimationConfiguration.staggeredList(
+            position: index,
+            duration: const Duration(milliseconds: 1000),
+            child: SlideAnimation(
+              verticalOffset: 80.0,
+              child: FadeInAnimation(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: ShoeCard(shoe: shoes[index]),
                 ),
-          child: ShoeCard(shoe: shoe),
-        );
-
-
-      },
-      childCount: length,
-    ));
+              ),
+            ),
+          );
+        },
+        childCount: length,
+      ),
+    );
   }
 }
