@@ -53,7 +53,6 @@ class FetchShoeCubit extends Cubit<ShoeState> {
     if(state.isLoading || state.isReachedMax) return;
 
 
-    emit(ShoeState.initial());
     emit(ShoeState(shoes: state.shoes,
         isReachedMax: state.isReachedMax,
         page: state.page,
@@ -85,43 +84,10 @@ class FetchShoeCubit extends Cubit<ShoeState> {
 
   }
 
-  Future<void> getShoesForHomeOnly()async
-  {
-    if(state.isLoading || state.isReachedMax) return;
-
-
-    emit(ShoeState(shoes: state.shoes,
-        isReachedMax: state.isReachedMax,
-        page: state.page,
-        isLoading: true,
-        isLoadingForPaging: state.page>1 ? true : false));
-
-    final newShoes = await getShoes(
-      brand: '',
-      page: 1,
-      limit: limit,
-    );
-
-    debugPrint('>$newShoes');
-
-
-    newShoes.fold(ifLeft: (failure)=>emit(
-        ShoeState(shoes: [],
-            isReachedMax: false,
-            page:state.page,
-            isLoading: false,
-            isLoadingForPaging: false,
-            errMsg: failure.message)),
-        ifRight: (success)=>emit(
-            ShoeState(
-                shoes: success,
-                isReachedMax: success.length<limit,
-                page: state.page+1,
-                isLoading: false,
-                isLoadingForPaging: false)
-        ));
-
-  }
+ void resetState()
+ {
+   emit(ShoeState.initial());
+ }
 
 
 

@@ -10,6 +10,7 @@ import 'package:shoe/features/catogories/view/bloc/Catotitle_check_cubit.dart';
 import 'package:shoe/features/catogories/view/bloc/FetchCatogoriesCubit.dart';
 import 'package:shoe/features/catogories/view/bloc/GetCategoriesState.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shoe/features/products/view/shoe_cubit/shoe_state.dart';
 
 import '../../../products/view/shoe_cubit/shoe_cubit.dart';
 
@@ -22,11 +23,13 @@ class CatogoriesWidget extends StatefulWidget {
 
 class _CatogoriesWidget extends State<CatogoriesWidget> {
   _CatogoriesWidget();
+ late final cubit;
 
   @override
   void initState() {
     super.initState();
     context.read<FetchCatogoriesCubit>().getAllCato();
+     ShoeState.initial();
 
   }
 
@@ -72,7 +75,9 @@ class _CatogoriesWidget extends State<CatogoriesWidget> {
                               child: GestureDetector(
                                 onTap: () {
                                   context.read<IsCatSelected>().onSelected(index);
+                                  context.read<FetchShoeCubit>().resetState();
                                   context.read<FetchShoeCubit>().getShoesFormBrand(cato[index].title.toLowerCase());
+
                                 },
                                 child: Container(
                                   height: constraints.maxHeight,

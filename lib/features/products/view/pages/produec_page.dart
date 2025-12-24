@@ -17,12 +17,14 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProduecPageState extends State<ProductPage> {
+  late final state;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<FetchShoeCubit>().getShoesForHome();
+
+    state = context.read<FetchShoeCubit>().getShoesForHome();
   }
 
   @override
@@ -47,7 +49,8 @@ class _ProduecPageState extends State<ProductPage> {
       }
       if(state.shoes.isNotEmpty)
       {
-        return  ProductsList(shoes: state.shoes,length: 4,);
+        final length = state.shoes.length<4 ? state.shoes.length : 4;
+        return  ProductsList(shoes: state.shoes,length: length,);
 
       }
       if(state.isLoadingForPaging)

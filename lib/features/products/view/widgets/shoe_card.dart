@@ -52,7 +52,7 @@ class ShoeCard extends StatelessWidget {
                         shoe.title,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 42,
+                          fontSize: 45,
                           fontWeight: FontWeight.w800,
                           height: 1,
                           shadows: [
