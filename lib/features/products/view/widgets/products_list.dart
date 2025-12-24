@@ -19,6 +19,7 @@ class ProductsList extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
             (context, index) {
+
           return AnimationConfiguration.staggeredList(
             position: index,
             duration: const Duration(milliseconds: 1000),

@@ -10,11 +10,11 @@ class ImageOverlay extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end:  Alignment.bottomLeft,
+
 
             colors: [
-              Colors.black.withOpacity(0.65),
-              Colors.black.withOpacity(0.105),
+              Colors.black.withOpacity(0.250),
+              Colors.black.withOpacity(0.150),
             ],
           ),
         ),

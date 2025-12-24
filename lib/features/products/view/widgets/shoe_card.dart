@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shoe/core/utils/shoe_model.dart';
 import 'package:shoe/features/products/view/widgets/shimmer.dart';
 import '../../domain/product_entity/shoe.dart';
 import 'overlay.dart';
@@ -19,7 +20,7 @@ class ShoeCard extends StatelessWidget {
       height: MediaQuery.of(context).size.height*0.4,
       width: double.infinity,
       child: Padding(
-        padding:  EdgeInsets.only(top: 5,left: 4,bottom: 8),
+        padding:  EdgeInsets.only(top: 5,left: 4,bottom: 5),
         child: Card(
           elevation: 6,
           shape: OutlineInputBorder(
@@ -38,7 +39,9 @@ class ShoeCard extends StatelessWidget {
                   ),
                 ),
               ),
-              ImageOverlay(),
+
+
+
               Positioned(
                   top: 0,
                   left: 8,
@@ -49,18 +52,25 @@ class ShoeCard extends StatelessWidget {
                         shoe.title,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 32,
+                          fontSize: 42,
                           fontWeight: FontWeight.w800,
+                          height: 1,
                           shadows: [
                             Shadow(
-                              blurRadius: 8,
-                              color: Colors.black.withOpacity(0.6),
+                              blurRadius: 25,
+                              color: Colors.black.withOpacity(0.7),
                             ),
                           ],
                         ),
                       ),
                       Text(shoe.brand.toUpperCase(),
                         style: TextStyle(
+                            shadows: [
+                              Shadow(
+                                blurRadius: 25,
+                                color: Colors.black.withOpacity(0.7),
+                              ),
+                            ],
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.w600
@@ -73,27 +83,59 @@ class ShoeCard extends StatelessWidget {
                   bottom: 5,
                   left: 8,
                   child: Row(
+
                     children: [
                       Text("${shoe.oldPrice}\$",
                         style: TextStyle(
+                          decoration: TextDecoration.lineThrough,
+                            decorationColor: Colors.redAccent,
+                            decorationThickness: 3,
                             color: Colors.white,
                             fontSize: 18,
-                            fontWeight: FontWeight.w800
+                            fontWeight: FontWeight.w800,
+                          shadows: [
+                            Shadow(
+                              blurRadius: 25,
+                              color: Colors.black.withOpacity(0.7),
+                            ),
+                          ],
                         ),),
                       SizedBox(width: 10,),
                       Text("${shoe.newPrice}\$",
                         style: TextStyle(
+                            shadows: [
+                              Shadow(
+                                blurRadius: 25,
+                                color: Colors.black.withOpacity(0.7),
+                              ),
+                            ],
                             color: Colors.white,
-                            fontSize: 32,
+                            fontSize: 38,
                             fontWeight: FontWeight.w800
                         ),),
                     ],
                   )),
               Positioned(
-                  bottom: 0,
+                  top: 10,
                   right: 10,
                   child: Row(
                     children: [
+                      Image.asset('assets/images/star.png',
+                      height: 25,),
+                      SizedBox(width: 4,),
+                      Text("${shoe.rating}",
+                      style: TextStyle(
+                          shadows: [
+                            Shadow(
+                              blurRadius: 25,
+                              color: Colors.black.withOpacity(0.7),
+                            ),
+                          ],
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold
+                      ),)
+
 
                     ],
                   )

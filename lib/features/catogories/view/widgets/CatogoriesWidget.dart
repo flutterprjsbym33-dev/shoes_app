@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:shoe/core/utils/appColor.dart';
+import 'package:shoe/core/utils/catmodel.dart';
 import 'package:shoe/core/utils/snackbar.dart';
 import 'package:shoe/features/catogories/view/bloc/Catotitle_check_cubit.dart';
 import 'package:shoe/features/catogories/view/bloc/FetchCatogoriesCubit.dart';
@@ -26,7 +27,7 @@ class _CatogoriesWidget extends State<CatogoriesWidget> {
   void initState() {
     super.initState();
     context.read<FetchCatogoriesCubit>().getAllCato();
-    context.read<FetchShoeCubit>().getShoesForHome();
+
   }
 
   @override
@@ -71,6 +72,7 @@ class _CatogoriesWidget extends State<CatogoriesWidget> {
                               child: GestureDetector(
                                 onTap: () {
                                   context.read<IsCatSelected>().onSelected(index);
+                                  context.read<FetchShoeCubit>().getShoesFormBrand(cato[index].title.toLowerCase());
                                 },
                                 child: Container(
                                   height: constraints.maxHeight,

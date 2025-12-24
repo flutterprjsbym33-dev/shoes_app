@@ -23,6 +23,7 @@ class _SeeAllProductsState extends State<SeeAllProducts> {
 
     super.initState();
     _scrollController.addListener(onScrollListen);
+    context.read<FetchShoeCubit>().getShoesForHome();
   }
 
   void onScrollListen(){
