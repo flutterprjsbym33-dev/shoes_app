@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shoe/core/utils/shoe_model.dart';
 import 'package:shoe/features/products/view/pages/detail_screen.dart';
 import 'package:shoe/features/products/view/widgets/shimmer.dart';
@@ -55,30 +56,36 @@ class ShoeCard extends StatelessWidget {
                       children: [
                         Text(
                           shoe.title,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 45,
-                            fontWeight: FontWeight.w800,
-                            height: 1,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 25,
-                                color: Colors.black.withOpacity(0.7),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(shoe.brand.toUpperCase(),
-                          style: TextStyle(
+                          style: GoogleFonts.ibmPlexSans(
+                           textStyle:  TextStyle(
+                             fontStyle: FontStyle.italic,
+                              color: Colors.white,
+                              fontSize: 45,
+                              fontWeight: FontWeight.w800,
+                              height: 1,
                               shadows: [
                                 Shadow(
                                   blurRadius: 25,
                                   color: Colors.black.withOpacity(0.7),
                                 ),
                               ],
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600
+                            ),
+                          )
+                        ),
+                        Text(shoe.brand.toUpperCase(),
+                          style: GoogleFonts.ibmPlexSans(
+                            textStyle: TextStyle(
+                              fontStyle: FontStyle.italic,
+                                shadows: [
+                                  Shadow(
+                                    blurRadius: 25,
+                                    color: Colors.black.withOpacity(0.7),
+                                  ),
+                                ],
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600
+                            )
                           ),),
 
                       ],
@@ -91,32 +98,36 @@ class ShoeCard extends StatelessWidget {
 
                       children: [
                         Text("${shoe.oldPrice}\$",
-                          style: TextStyle(
-                            decoration: TextDecoration.lineThrough,
+                          style: GoogleFonts.sairaCondensed(
+                            textStyle: TextStyle(
+                              decoration: TextDecoration.lineThrough,
                               decorationColor: Colors.redAccent,
-                              decorationThickness: 3,
+                              decorationThickness: 1,
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 20,
                               fontWeight: FontWeight.w800,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 25,
-                                color: Colors.black.withOpacity(0.7),
-                              ),
-                            ],
-                          ),),
-                        SizedBox(width: 10,),
-                        Text("${shoe.newPrice}\$",
-                          style: TextStyle(
                               shadows: [
                                 Shadow(
                                   blurRadius: 25,
                                   color: Colors.black.withOpacity(0.7),
                                 ),
                               ],
-                              color: Colors.white,
-                              fontSize: 38,
-                              fontWeight: FontWeight.w800
+                            )
+                          ),),
+                        SizedBox(width: 10,),
+                        Text("${shoe.newPrice}\$",
+                          style: GoogleFonts.sairaCondensed(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 38,
+                                fontWeight: FontWeight.w800,
+                                shadows: [
+                                  Shadow(
+                                    blurRadius: 25,
+                                    color: Colors.black.withOpacity(0.7),
+                                  ),
+                                ],
+                              )
                           ),),
                       ],
                     )),

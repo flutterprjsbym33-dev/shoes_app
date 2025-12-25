@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shoe/features/products/view/shoe_cubit/size_cubit.dart';
 
 import '../../domain/product_entity/shoe.dart';
@@ -14,16 +15,19 @@ class ProductInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(shoe.title,
-        style: TextStyle(
-          fontSize: 55,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-          shadows: [
-            Shadow(
-              blurRadius: 25,
-              color: Colors.black.withOpacity(0.6)
+        style: GoogleFonts.ibmPlexSans(
+            textStyle: TextStyle(
+              fontStyle: FontStyle.italic,
+                fontSize: 55,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                shadows: [
+                  Shadow(
+                      blurRadius: 25,
+                      color: Colors.black.withOpacity(0.6)
+                  )
+                ]
             )
-          ]
         ),),
         SizedBox(height: 10,),
         Text("Sizes",style: TextStyle(
