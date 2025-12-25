@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:shoe/features/products/view/widgets/detail_screen_detail_widget.dart';
+import 'package:shoe/features/products/view/widgets/overlay.dart';
 
 import '../../domain/product_entity/shoe.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   Shoe shoe;
-   DetailScreen({super.key,required this.shoe});
+  DetailScreen({required this.shoe});
+  @override
+  State<StatefulWidget> createState() => _DetailScreen();
+}
+
+class _DetailScreen extends State<DetailScreen> {
+
+ late final shoe;
+  bool startAnimation = false;
+
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    shoe = widget.shoe;
+    Future.delayed(Duration(milliseconds: 40),(){
+      setState(() {
+        startAnimation = true;
+      });
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +38,7 @@ class DetailScreen extends StatelessWidget {
           Positioned.fill(child:
           Image.network(shoe.images[1],
           fit: BoxFit.cover,)),
+          ImageOverlay(),
 
 
           //BackButton
@@ -35,6 +59,27 @@ class DetailScreen extends StatelessWidget {
                 child: Icon(Icons.favorite_border,
                   color: Colors.black,size: 28,),
               )),
+          
+          //product info
+          
+          Positioned(
+            bottom: 50,
+            left: 10,
+            right: 10,
+            child: AnimatedSlide(
+              offset:  startAnimation ? Offset.zero : Offset(0, 1),
+              duration: Duration(milliseconds: 700),
+              child: AnimatedOpacity(
+                opacity: startAnimation ? 1 : 0 ,
+                duration: Duration(milliseconds: 600),
+                child: Positioned(
+                  bottom: 50,
+                    left: 10,
+                    right: 10,
+                    child:ProductInfo(shoe: shoe) ),
+              ),
+            ),
+          )
 
 
 

@@ -11,6 +11,7 @@ import 'package:shoe/features/banners/view/bloc/FetchBannerMainBloc.dart';
 import 'package:shoe/features/catogories/view/bloc/Catotitle_check_cubit.dart';
 import 'package:shoe/features/catogories/view/bloc/FetchCatogoriesCubit.dart';
 import 'package:shoe/features/products/view/shoe_cubit/shoe_cubit.dart';
+import 'package:shoe/features/products/view/shoe_cubit/size_cubit.dart';
 import 'firebase_options.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shoe/features/authentication/view/pages/LoginScrren.dart';
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<BottomNavCubit>(create: (context)=>Initializer.getIt<BottomNavCubit>()),
         BlocProvider<FetchCatogoriesCubit>(create: (context)=>Initializer.getIt<FetchCatogoriesCubit>()),
         BlocProvider<IsCatSelected>(create: (context)=>IsCatSelected()),
-        BlocProvider<FetchShoeCubit>(create: (context)=>Initializer.getIt<FetchShoeCubit>())
+        BlocProvider<FetchShoeCubit>(create: (context)=>Initializer.getIt<FetchShoeCubit>()),
+        BlocProvider<SizeManager>(create: (context)=>SizeManager())
       ],
       child: ScreenUtilInit(
         designSize:   const Size(412, 846),

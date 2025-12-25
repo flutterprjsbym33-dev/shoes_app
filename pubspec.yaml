@@ -28,6 +28,7 @@ dependencies:
   another_carousel_pro: ^1.0.2
   animated_bottom_navigation_bar:  ^1.4.0
   flutter_staggered_animations: ^1.1.1
+  google_fonts: ^6.3.3
 
 dev_dependencies:
   flutter_test:
