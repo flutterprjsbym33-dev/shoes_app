@@ -18,10 +18,9 @@ class _DetailScreen extends State<DetailScreen> {
 
    @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     shoe = widget.shoe;
-    Future.delayed(Duration(milliseconds: 40),(){
+    Future.delayed(Duration(milliseconds: 400),(){
       setState(() {
         startAnimation = true;
       });

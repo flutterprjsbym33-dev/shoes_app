@@ -29,6 +29,23 @@ class ProductInfo extends StatelessWidget {
                 ]
             )
         ),),
+        SizedBox(height: 4,),
+        Text(shoe.description,
+          style: GoogleFonts.ibmPlexSans(
+              textStyle: TextStyle(
+                  fontStyle: FontStyle.italic,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white.withOpacity(0.8),
+                  shadows: [
+                    Shadow(
+                        blurRadius: 25,
+                        color: Colors.black.withOpacity(0.6)
+                    )
+                  ]
+              )
+          ),),
+
         SizedBox(height: 10,),
         Text("Sizes",style: TextStyle(
             fontSize: 24,
@@ -109,10 +126,11 @@ class ProductInfo extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)
                 ),
-                backgroundColor: Colors.white.withOpacity(0.6)
+                backgroundColor: Colors.white.withOpacity(0.7)
               ),
               child: Text("Add to cart",
               style: TextStyle(
+                fontWeight: FontWeight.bold,
                 fontSize: 18,
                 color: Colors.black
               ),)),
