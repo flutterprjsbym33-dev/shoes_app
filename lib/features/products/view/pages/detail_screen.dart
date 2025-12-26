@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shoe/features/products/view/widgets/detail_screen_detail_widget.dart';
 import 'package:shoe/features/products/view/widgets/overlay.dart';
+import 'package:shoe/features/products/view/widgets/shimmer.dart';
 
 import '../../domain/product_entity/shoe.dart';
 
@@ -13,7 +15,7 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreen extends State<DetailScreen> {
 
- late final shoe;
+ late final Shoe shoe;
   bool startAnimation = false;
 
    @override
@@ -34,9 +36,10 @@ class _DetailScreen extends State<DetailScreen> {
       body: Stack(
         children: [
           //background Image
-          Positioned.fill(child:
-          Image.network(shoe.images[1],
-          fit: BoxFit.cover,)),
+
+          Positioned.fill(child: shoe.images.isEmpty ? Shimmers():
+          CachedNetworkImage(imageUrl: shoe.images[1],
+          fit: BoxFit.cover,),),
           ImageOverlay(),
 
 
@@ -71,14 +74,10 @@ class _DetailScreen extends State<DetailScreen> {
               child: AnimatedOpacity(
                 opacity: startAnimation ? 1 : 0 ,
                 duration: Duration(milliseconds: 600),
-                child: Positioned(
-                  bottom: 50,
-                    left: 10,
-                    right: 10,
-                    child:ProductInfo(shoe: shoe) ),
+                child: ProductInfo(shoe: shoe) ),
               ),
             ),
-          )
+
 
 
 
