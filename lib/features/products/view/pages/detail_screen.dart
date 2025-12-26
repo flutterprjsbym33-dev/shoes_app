@@ -39,6 +39,7 @@ class _DetailScreen extends State<DetailScreen> {
 
           Positioned.fill(child: shoe.images.isEmpty ? Shimmers():
           CachedNetworkImage(imageUrl: shoe.images[1],
+          placeholder: (_,_)=>Shimmers(),
           fit: BoxFit.cover,),),
           ImageOverlay(),
 

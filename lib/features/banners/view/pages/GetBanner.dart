@@ -99,6 +99,7 @@ class _GetBanners extends State<GetBanners> {
                               errorWidget: (context, url, error) => Icon(Icons.error),
                             )).toList(),
                               dotSize: 0,
+                              autoplay: true,
                               dotColor: Colors.transparent,
                               dotBgColor: Colors.transparent,)
                           );
