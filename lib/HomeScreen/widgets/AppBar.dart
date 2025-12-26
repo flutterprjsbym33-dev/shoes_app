@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoe/HomeScreen/pages/BottomNav.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/products/data/model/shoe_model.dart';
@@ -29,10 +30,8 @@ class CustomAppbar extends StatelessWidget {
                Row(
                 children: [
                   IconButton(onPressed: ()async{
-                    final data = await Supabase.instance.client.from('shoes').select() as List;
-                    debugPrint(data.toString());
-                    final shoes = data.map((e)=>ShoeModel.fromJson(e)).toList();
-                    debugPrint(shoes.length.toString());
+                   Navigator.push(context,
+                   MaterialPageRoute(builder: (context)=>BottomNavigator()));
 
 
                   }, icon: Icon(Icons.notifications,size: 30.h,)),
