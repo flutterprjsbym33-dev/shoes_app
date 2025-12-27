@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoe/HomeScreen/pages/BottomNav.dart';
 import 'package:shoe/HomeScreen/pages/TestHomeScreen.dart';
 import 'package:shoe/core/utils/AuthType.dart';
 import 'package:shoe/core/utils/snackbar.dart';
@@ -109,7 +110,7 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
                                 Align(
                                   alignment: Alignment.bottomRight,
                                   child: TextButton(onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Testhomescreen()));
+                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomNavigator()));
                                   }, child: Text("Forgot Password?")),
                                 ) : SizedBox(),
                                 SizedBox(height: 10.h),
@@ -121,7 +122,7 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
                                          ShowSnacBar(context: context,
                                              discrip: "Welcome again, ${state.user.userName}",
                                              type: SnackBarType.Success);
-                                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Testhomescreen()));
+                                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomNavigator()));
                                        }
                                      if(state is LoginUserWithEmailErrorState)
                                        {
@@ -150,7 +151,7 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
                                          ShowSnacBar(context: context,
                                              discrip: "Welcome ${state.user.userName},& Thankyou for creating Acoount",
                                              type: SnackBarType.Success);
-                                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Testhomescreen()));
+                                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomNavigator()));
                                        }
                                        if(state is SignUserWithEmailErrorState)
                                        {
@@ -200,7 +201,7 @@ class _AnimatedCardwidgetState extends State<AnimatedCardwidget> {
                                             ShowSnacBar(context: context,
                                                 discrip: "Welcome ${state.user.userName},& Thankyou ,Enjoy shopping with amazing app",
                                                 type: SnackBarType.Success);
-                                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Testhomescreen()));
+                                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomNavigator()));
                                           }
                                           if(state is SignUserWithGoogleErrorState)
                                           {
