@@ -28,11 +28,25 @@ class AuthMainBloc extends Bloc<AuthMainEvents,AuthenticationMainState>
   Future<void> signInWithEmail(SignInUserWithEmail event,Emitter<AuthenticationMainState> emit)async
   {
     try{
-      if(event.userName.isEmpty && event.password.isEmpty )
+      if(state is SignUserWithEmailLoadingState || state is LoginUserWithEmailLoadingState )
         {
-          SignUserWithEmailErrorState("empty");
-
+          return;
         }
+      if(state is SignUserWithGoogleLoadingState )
+      {
+        return;
+      }
+      //Checking userName is more than 6 character and starts with letter or not
+      if (event.userName.length < 6 || !RegExp(r'^[a-zA-Z]').hasMatch(event.userName)) {
+      emit(SignUserWithEmailErrorState( "Full name must be 6 characters and start with a letter"));
+      return;
+    }
+
+      //checking email is valid or not if not valid showing error and returning
+      if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(event.email)) {
+        emit(SignUserWithEmailErrorState( "Invalid email address"));
+        return;
+      }
       emit(SignUserWithEmailLoadingState());
      final user =  await signUpWithFirebase.call(event.userName, event.email, event.password);
      emit(SignUserWithEmailSuccessState(user));
@@ -50,6 +64,19 @@ class AuthMainBloc extends Bloc<AuthMainEvents,AuthenticationMainState>
   Future<void> logInWithEmail(LoginUserWithEmail event,Emitter<AuthenticationMainState> emit)async
   {
     try{
+      if(state is SignUserWithEmailLoadingState || state is LoginUserWithEmailLoadingState )
+      {
+        return;
+      }
+      if(state is SignUserWithGoogleLoadingState )
+      {
+        return;
+      }
+
+      if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(event.email)) {
+        emit(LoginUserWithEmailErrorState( "Invalid email address"));
+        return;
+      }
       emit(LoginUserWithEmailLoadingState());
       final user =  await loginUseCase.call( event.email, event.password);
       emit(LoginUserWithEmailSuccessState(user));
@@ -67,6 +94,14 @@ class AuthMainBloc extends Bloc<AuthMainEvents,AuthenticationMainState>
   Future<void> sinInWithGoogle(SignInUserWithGoogle event,Emitter<AuthenticationMainState> emit)async
   {
     try{
+      if(state is SignUserWithEmailLoadingState || state is LoginUserWithEmailLoadingState )
+      {
+        return;
+      }
+      if(state is SignUserWithGoogleLoadingState )
+      {
+        return;
+      }
       emit(SignUserWithGoogleLoadingState());
       final user =  await googleSignInUseCase.call();
       emit(SignUserWithGoogleSuccessState(user));

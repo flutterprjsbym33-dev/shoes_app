@@ -66,7 +66,7 @@ class _DetailScreen extends State<DetailScreen> {
           //product info
           
           Positioned(
-            bottom: 50,
+            bottom: 30,
             left: 10,
             right: 10,
             child: AnimatedSlide(
