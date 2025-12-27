@@ -1,23 +1,15 @@
-class Cart{
-  final String id;
-  final String title;
-  final String description;
-  final String brand;
-  final List<int> sizes;
-  final double rating;
-  final double oldPrice;
-  final double newPrice;
-  final List<String> images;
+import '../../../products/domain/product_entity/shoe.dart';
 
+class Cart{
+ Shoe shoe;
+ int quantity;
   Cart({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.brand,
-    required this.sizes,
-    required this.rating,
-    required this.oldPrice,
-    required this.newPrice,
-    required this.images,
-});
+    required this.shoe,
+    required this.quantity,
+   });
+
+  Cart copyWith({int? quantity})
+  {
+    return Cart(shoe: this.shoe, quantity: quantity ?? this.quantity);
+  }
 }
