@@ -10,6 +10,10 @@ Future<void> removeFromCart(String shoeId);
 
 //update quantity
 
+Future<void> quantityManger(String shoeId);
+
+Future<List<Cart>> getAllCartItems();
+
 
 
 
