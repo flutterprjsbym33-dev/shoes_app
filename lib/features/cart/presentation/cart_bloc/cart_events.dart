@@ -1,9 +1,9 @@
 import '../../domain/cart_entity/cart_entity.dart';
 
 abstract class CartMainEvents{}
-class AddToCart extends CartMainEvents{
+class AddToCartEvent extends CartMainEvents{
   Cart cart;
-  AddToCart({required this.cart});
+  AddToCartEvent({required this.cart});
 }
 
 class RemoveFromCard extends CartMainEvents{
