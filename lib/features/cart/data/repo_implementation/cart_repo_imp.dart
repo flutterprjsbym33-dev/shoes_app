@@ -26,21 +26,39 @@ class CartRepoImplementation extends CartRepository {
   }
 
   @override
-  Future<Either<Failure, List<Cart>>> getAllCartItems() {
-    // TODO: implement getAllCartItems
-    throw UnimplementedError();
+  Future<Either<Failure, List<Cart>>> getAllCartItems()async {
+    try{
+      final item =  await cartLocalDataSource.getAllCartItems();
+      return Right(item);
+    }on NoInternetException{
+      return Left(NetworkFailure("Network Failure"));
+    }on ServerErrorException{
+      return Left(ServerFailure("Server Failure"));
+    }
   }
 
   @override
-  Future<Either<Failure, Cart>> quantityManger(String shoeId, int quantity) {
-    // TODO: implement quantityManger
-    throw UnimplementedError();
+  Future<Either<Failure, Cart>> increaseQty(String shoeId, int quantity)async {
+    try{
+      final item =  await cartLocalDataSource.increaseQty(shoeId, quantity);
+      return Right(item);
+    }on NoInternetException{
+      return Left(NetworkFailure("Network Failure"));
+    }on ServerErrorException{
+      return Left(ServerFailure("Server Failure"));
+    }
   }
 
   @override
-  Future<Either<Failure, Cart>> removeFromCart(String shoeId) {
-    // TODO: implement removeFromCart
-    throw UnimplementedError();
+  Future<Either<Failure, bool>> removeFromCart(String shoeId)async {
+    try{
+      final item =  await cartLocalDataSource.removeFromCart(shoeId);
+      return Right(item);
+    }on NoInternetException{
+      return Left(NetworkFailure("Network Failure"));
+    }on ServerErrorException{
+      return Left(ServerFailure("Server Failure"));
+    }
   }
 
 }

@@ -10,7 +10,7 @@ class QuantityManager{
 
   Future<Either<Failure,Cart>> call(String shoeId,int quantity)async
   {
-    return await cartRepository.quantityManger(shoeId,quantity);
+    return await cartRepository.increaseQty(shoeId,quantity);
   }
 
 }
