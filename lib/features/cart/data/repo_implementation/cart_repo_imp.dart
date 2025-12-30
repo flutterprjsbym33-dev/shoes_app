@@ -26,19 +26,19 @@ class CartRepoImplementation extends CartRepository {
   }
 
   @override
-  Future<List<Cart>> getAllCartItems() {
+  Future<Either<Failure, List<Cart>>> getAllCartItems() {
     // TODO: implement getAllCartItems
     throw UnimplementedError();
   }
 
   @override
-  Future<void> quantityManger(String shoeId, int quantity) {
+  Future<Either<Failure, Cart>> quantityManger(String shoeId, int quantity) {
     // TODO: implement quantityManger
     throw UnimplementedError();
   }
 
   @override
-  Future<void> removeFromCart(String shoeId) {
+  Future<Either<Failure, Cart>> removeFromCart(String shoeId) {
     // TODO: implement removeFromCart
     throw UnimplementedError();
   }

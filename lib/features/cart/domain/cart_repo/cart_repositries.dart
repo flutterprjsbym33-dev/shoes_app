@@ -9,13 +9,13 @@ abstract class CartRepository {
   Future<Either<Failure,Cart>> addToCart(Cart cart);
 
   // remove from cart
-Future<void> removeFromCart(String shoeId);
+Future<Either<Failure,Cart>> removeFromCart(String shoeId);
 
 //update quantity
 
-Future<void> quantityManger(String shoeId,int quantity);
+Future<Either<Failure,Cart>> quantityManger(String shoeId,int quantity);
 
-Future<List<Cart>> getAllCartItems();
+Future<Either<Failure,List<Cart>>> getAllCartItems();
 
 
 
