@@ -21,6 +21,13 @@ import 'package:shoe/features/banners/data/datasource/BannersLocalDataSource.dar
 import 'package:shoe/features/banners/domain/bannerRepo/BannerRepo.dart';
 import 'package:shoe/features/banners/domain/usecases/getbanner.dart';
 import 'package:shoe/features/banners/view/bloc/FetchBannerMainBloc.dart';
+import 'package:shoe/features/cart/data/data_source/cart_local_data_source.dart';
+import 'package:shoe/features/cart/data/model/cart_model.dart';
+import 'package:shoe/features/cart/data/repo_implementation/cart_repo_imp.dart';
+import 'package:shoe/features/cart/domain/cart_repo/cart_repositries.dart';
+import 'package:shoe/features/cart/domain/cart_use_cases/add_to_cart.dart';
+import 'package:shoe/features/cart/presentation/cart_bloc/cart_events.dart';
+import 'package:shoe/features/cart/presentation/cart_bloc/cart_main_bloc.dart';
 import 'package:shoe/features/catogories/data/cat_data_source/CatRepoLocalDataSource.dart';
 import 'package:shoe/features/catogories/data/cat_repo_imp/Cat_repo_impl.dart';
 import 'package:shoe/features/catogories/domain/UseCases/GetCateogories.dart';
@@ -33,6 +40,9 @@ import 'package:shoe/features/products/view/shoe_cubit/shoe_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/authentication/domain/useCases/AuthUseCase.dart';
+import '../../features/cart/domain/cart_use_cases/get_all_cart_items.dart';
+import '../../features/cart/domain/cart_use_cases/quantity_manager.dart';
+import '../../features/cart/domain/cart_use_cases/remove_from_cart.dart';
 import '../../features/catogories/view/bloc/FetchCatogoriesCubit.dart';
 import '../../firebase_options.dart';
 
@@ -104,6 +114,28 @@ class CreateObj{
     getIt.registerLazySingleton<GetShoes>(()=>GetShoes(getIt<ShoeRepository>()));
 
     getIt.registerFactory<FetchShoeCubit>(()=>FetchShoeCubit(getShoes: getIt<GetShoes>()));
+
+
+    //GetIt for AddToCart
+
+
+   getIt.registerLazySingleton<CartLocalDataSource>(()=>CartLocalDataSource(box: Hive.box('cart')));
+
+   getIt.registerLazySingleton<CartRepoImplementation>(()=>CartRepoImplementation(cartLocalDataSource: getIt<CartLocalDataSource>()));
+
+   getIt.registerLazySingleton<CartRepository>(()=>getIt<CartRepoImplementation>());
+
+   getIt.registerLazySingleton<AddToCart>(()=>AddToCart(cartRepository: getIt<CartRepository>()));
+
+    getIt.registerLazySingleton<GetCartItems>(()=>GetCartItems(cartRepository: getIt<CartRepository>()));
+
+   getIt.registerLazySingleton<IncreaseQuantity>(()=>IncreaseQuantity(cartRepository: getIt<CartRepository>()));
+
+ getIt.registerLazySingleton<RemoveFromCart>(()=>RemoveFromCart(cartRepository: getIt<CartRepository>()));
+
+ getIt.registerCachedFactory<CartBloc>(()=>CartBloc(addToCartUseCase: getIt<AddToCart>()));
+
+
 
 
 

@@ -4,9 +4,9 @@ import 'package:shoe/features/cart/domain/cart_repo/cart_repositries.dart';
 import '../../../banners/domain/failure.dart';
 import '../cart_entity/cart_entity.dart';
 
-class QuantityManager{
+class IncreaseQuantity{
   CartRepository cartRepository;
-  QuantityManager({required this.cartRepository});
+  IncreaseQuantity({required this.cartRepository});
 
   Future<Either<Failure,Cart>> call(String shoeId,int quantity)async
   {

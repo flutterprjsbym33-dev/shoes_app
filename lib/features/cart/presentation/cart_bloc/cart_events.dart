@@ -6,9 +6,9 @@ class AddToCartEvent extends CartMainEvents{
   AddToCartEvent({required this.cart});
 }
 
-class RemoveFromCard extends CartMainEvents{
+class RemoveFromCardS extends CartMainEvents{
   String shoeId;
-  RemoveFromCard({required this.shoeId});
+  RemoveFromCardS({required this.shoeId});
 }
 
 class GetAllCardItems extends CartMainEvents{}

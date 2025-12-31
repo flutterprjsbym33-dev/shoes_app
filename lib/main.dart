@@ -8,6 +8,8 @@ import 'package:shoe/core/di/GetIt.dart';
 import 'package:shoe/core/utils/Init.dart';
 import 'package:shoe/features/authentication/view/bloc/AuthMainBloc.dart';
 import 'package:shoe/features/banners/view/bloc/FetchBannerMainBloc.dart';
+import 'package:shoe/features/cart/domain/cart_use_cases/add_to_cart.dart';
+import 'package:shoe/features/cart/presentation/cart_bloc/cart_main_bloc.dart';
 import 'package:shoe/features/catogories/view/bloc/Catotitle_check_cubit.dart';
 import 'package:shoe/features/catogories/view/bloc/FetchCatogoriesCubit.dart';
 import 'package:shoe/features/products/view/shoe_cubit/shoe_cubit.dart';
@@ -41,7 +43,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<FetchCatogoriesCubit>(create: (context)=>Initializer.getIt<FetchCatogoriesCubit>()),
         BlocProvider<IsCatSelected>(create: (context)=>IsCatSelected()),
         BlocProvider<FetchShoeCubit>(create: (context)=>Initializer.getIt<FetchShoeCubit>()),
-        BlocProvider<SizeManager>(create: (context)=>SizeManager())
+        BlocProvider<SizeManager>(create: (context)=>SizeManager()),
+        BlocProvider<CartBloc>(create: (context)=>CartBloc(addToCartUseCase: Initializer.getIt<AddToCart>()))
       ],
       child: ScreenUtilInit(
         designSize:   const Size(412, 846),
