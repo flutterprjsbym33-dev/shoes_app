@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<IsCatSelected>(create: (context)=>IsCatSelected()),
         BlocProvider<FetchShoeCubit>(create: (context)=>Initializer.getIt<FetchShoeCubit>()),
         BlocProvider<SizeManager>(create: (context)=>SizeManager()),
-        BlocProvider<CartBloc>(create: (context)=>CartBloc(addToCartUseCase: Initializer.getIt<AddToCart>()))
+        BlocProvider<CartBloc>(create: (context)=>Initializer.getIt<CartBloc>())
       ],
       child: ScreenUtilInit(
         designSize:   const Size(412, 846),

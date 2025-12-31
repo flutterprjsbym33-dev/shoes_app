@@ -131,9 +131,13 @@ class CreateObj{
 
    getIt.registerLazySingleton<IncreaseQuantity>(()=>IncreaseQuantity(cartRepository: getIt<CartRepository>()));
 
- getIt.registerLazySingleton<RemoveFromCart>(()=>RemoveFromCart(cartRepository: getIt<CartRepository>()));
 
- getIt.registerCachedFactory<CartBloc>(()=>CartBloc(addToCartUseCase: getIt<AddToCart>()));
+
+
+    getIt.registerLazySingleton<RemoveFromCart>(()=>RemoveFromCart(cartRepository: getIt<CartRepository>()));
+
+ getIt.registerCachedFactory<CartBloc>(()=>CartBloc(addToCartUseCase: getIt<AddToCart>(),
+     getAllCardItems: getIt<GetCartItems>(), increaseQty: getIt<IncreaseQuantity>(), removeFromCart: getIt<RemoveFromCart>()),);
 
 
 

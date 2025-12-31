@@ -13,6 +13,7 @@ import 'package:shoe/features/authentication/domain/authRepo/AuthRepositries.dar
 import 'package:shoe/features/authentication/domain/useCases/GoogleSignInUseCase.dart';
 import 'package:shoe/features/authentication/domain/useCases/LoginUser.dart';
 import 'package:shoe/features/authentication/view/bloc/AuthMainBloc.dart';
+import 'package:shoe/features/cart/data/model/cart_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/authentication/domain/useCases/AuthUseCase.dart';
@@ -28,6 +29,8 @@ class Initializer{
    await  Hive.openBox('config');
    await Hive.openBox('user');
    await Hive.openBox('banners');
+Hive.registerAdapter(CartModelAdapter());
+    await Hive.openBox<CartModel>('cart');
 
     await Supabase.initialize(
       url: AppConstants.url,

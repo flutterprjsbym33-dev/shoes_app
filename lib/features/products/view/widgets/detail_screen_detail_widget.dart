@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shoe/core/utils/snackbar.dart';
+import 'package:shoe/features/cart/domain/cart_entity/cart_entity.dart';
+import 'package:shoe/features/cart/presentation/cart_bloc/cart_events.dart';
+import 'package:shoe/features/cart/presentation/cart_bloc/cart_main_bloc.dart';
+import 'package:shoe/features/cart/presentation/cart_bloc/cart_state.dart';
 import 'package:shoe/features/products/view/shoe_cubit/size_cubit.dart';
 
 import '../../domain/product_entity/shoe.dart';
@@ -121,19 +126,37 @@ class ProductInfo extends StatelessWidget {
         SizedBox(height: 8,),
         SizedBox(
           height: 45,width: double.infinity,
-          child: OutlinedButton(onPressed: (){},
-              style: OutlinedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)
+          child: BlocConsumer<CartBloc,CartMainState>(builder: (context,state){
+            return OutlinedButton(onPressed: ()async{
+              var selectedSize = context.read<SizeManager>().state;
+              context.read<CartBloc>().add(AddToCartEvent(cart: Cart(shoe: shoe, quantity: 1, size: selectedSize, time: DateTime.timestamp())));
+
+            },
+                style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)
+                    ),
+                    backgroundColor: Colors.white.withOpacity(0.7)
                 ),
-                backgroundColor: Colors.white.withOpacity(0.7)
-              ),
-              child: Text("Add to cart",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Colors.black
-              ),)),
+                child: Text("Add to cart",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.black
+                  ),));
+
+          }, listener: (context,state){
+            if(state is AddToCartSuccessfull)
+              {
+                ShowSnacBar(context: context, discrip: "Item Added in Cart", type: SnackBarType.Success);
+              }
+            if(state is AddToCartError)
+            {
+              debugPrint(state.errMsg);
+              ShowSnacBar(context: context, discrip: "Error Adding Cart", type: SnackBarType.Error);
+            }
+
+          }),
         )
 
       ],

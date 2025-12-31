@@ -43,6 +43,7 @@ class CartLocalDataSource extends CartLocalDataSourceRepo{
       throw NoInternetException();
     } catch (e)
     {
+      print(e.toString());
       throw ServerErrorException();
     }
 

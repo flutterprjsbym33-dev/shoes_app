@@ -6,15 +6,15 @@ class AddToCartEvent extends CartMainEvents{
   AddToCartEvent({required this.cart});
 }
 
-class RemoveFromCardS extends CartMainEvents{
+class RemoveFromCardE extends CartMainEvents{
   String shoeId;
-  RemoveFromCardS({required this.shoeId});
+  RemoveFromCardE({required this.shoeId});
 }
 
-class GetAllCardItems extends CartMainEvents{}
+class GetAllCardItemsE extends CartMainEvents{}
 
-class IncreaseQty extends CartMainEvents{
+class IncreaseQtyE extends CartMainEvents{
   String shoeId;
   int qty;
-  IncreaseQty({required this.shoeId,required this.qty});
+  IncreaseQtyE({required this.shoeId,required this.qty});
 }

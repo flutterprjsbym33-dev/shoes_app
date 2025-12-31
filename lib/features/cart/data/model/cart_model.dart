@@ -1,6 +1,7 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:shoe/features/cart/domain/cart_entity/cart_entity.dart';
 import 'package:shoe/features/products/domain/product_entity/shoe.dart';
+part 'cart_model.g.dart';
 
 @HiveType(typeId: 1)
 class CartModel extends HiveObject {

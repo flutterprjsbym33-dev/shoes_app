@@ -7,7 +7,7 @@ class GetCartItems{
   CartRepository cartRepository;
   GetCartItems({required this.cartRepository});
 
-  Future<Future<Either<Failure, List<Cart>>>> call()async{
-   return cartRepository.getAllCartItems();
+  Future<Either<Failure, List<Cart>>> call()async{
+   return await  cartRepository.getAllCartItems();
   }
 }

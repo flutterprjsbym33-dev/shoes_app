@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shoe/HomeScreen/pages/TestHomeScreen.dart';
 import 'package:shoe/core/utils/appColor.dart';
+import 'package:shoe/features/cart/presentation/pages/cart_items.dart';
 
 import '_test_profile.dart';
 
@@ -66,7 +67,8 @@ class _BottomNavigatorState extends State<BottomNavigator> {
                 controller: _pageController,
                 children: [
                   Testhomescreen(),
-                  ProfileScreen()
+                  ProfileScreen(),
+                  CartPage()
                 ],
               )
           ),
