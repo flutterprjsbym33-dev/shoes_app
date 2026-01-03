@@ -9,6 +9,7 @@ import 'package:shoe/core/utils/Init.dart';
 import 'package:shoe/features/authentication/view/bloc/AuthMainBloc.dart';
 import 'package:shoe/features/banners/view/bloc/FetchBannerMainBloc.dart';
 import 'package:shoe/features/cart/domain/cart_use_cases/add_to_cart.dart';
+import 'package:shoe/features/cart/presentation/cart_bloc/cart_cubit/check_out_cubit.dart';
 import 'package:shoe/features/cart/presentation/cart_bloc/cart_main_bloc.dart';
 import 'package:shoe/features/catogories/view/bloc/Catotitle_check_cubit.dart';
 import 'package:shoe/features/catogories/view/bloc/FetchCatogoriesCubit.dart';
@@ -44,7 +45,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<IsCatSelected>(create: (context)=>IsCatSelected()),
         BlocProvider<FetchShoeCubit>(create: (context)=>Initializer.getIt<FetchShoeCubit>()),
         BlocProvider<SizeManager>(create: (context)=>SizeManager()),
-        BlocProvider<CartBloc>(create: (context)=>Initializer.getIt<CartBloc>())
+        BlocProvider<CartBloc>(create: (context)=>Initializer.getIt<CartBloc>()),
+        BlocProvider<CheckOutCubit>(create: (context)=>CheckOutCubit()),
+
       ],
       child: ScreenUtilInit(
         designSize:   const Size(412, 846),
