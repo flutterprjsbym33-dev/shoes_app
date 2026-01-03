@@ -29,6 +29,7 @@ dependencies:
   animated_bottom_navigation_bar:  ^1.4.0
   flutter_staggered_animations: ^1.1.1
   google_fonts: ^6.3.3
+  intl: ^0.19.0
 
 dev_dependencies:
   build_runner: ^2.4.8

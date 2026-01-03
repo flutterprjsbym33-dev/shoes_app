@@ -64,7 +64,10 @@ class _CartPageState extends State<CartPage> {
                   if(state is GetAllCartItemsSuccessfull)
                     {
 
-                      return ListOfCartItems(items: state.cartItems);
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 4.0,right: 8),
+                        child: ListOfCartItems(items: state.cartItems),
+                      );
 
                     }
                   else{
